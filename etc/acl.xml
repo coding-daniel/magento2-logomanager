@@ -1,0 +1,13 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+<acl>
+    <resources>
+        <resource id="Magento_Backend::admin">
+            <resource id="Magento_Backend::content" title="Content" sortOrder="50">
+                <resource id="CodingDaniel_LogoManager::menu" title="Logo Manager" sortOrder="40">
+                    <resource id="CodingDaniel_LogoManager::logo_manager" title="Manage Logos" sortOrder="30"/>
+                </resource>
+            </resource>
+        </resource>
+    </resources>
+</acl>
+</config>

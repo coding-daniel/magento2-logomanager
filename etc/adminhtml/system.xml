@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Magento/Config/etc/system_file.xsd">
+    <system>
+        <tab id="CodingDaniel" translate="label" sortOrder="150" class="codingdaniel-tab">
+            <label>CodingDaniel</label>
+        </tab>
+    </system>
+</config>

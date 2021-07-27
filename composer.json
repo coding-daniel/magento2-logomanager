@@ -1,0 +1,31 @@
+{
+    "name": "codingdaniel/magento-logomanager",
+    "description": "",
+    "require": {
+        "php": ">=7.3.0"
+    },
+    "suggest": {
+
+    },
+    "type": "magento2-module",
+    "version": "0.0.1",
+    "license": [
+
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "CodingDaniel\\LogoManager\\": ""
+        }
+    },
+    "extra": {
+        "map": [
+            [
+                "*",
+                "CodingDaniel/LogoManager"
+            ]
+        ]
+    }
+}

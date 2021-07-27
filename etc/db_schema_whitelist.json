@@ -1,0 +1,17 @@
+{
+    "codingdaniel_logomanager_logos": {
+        "column": {
+            "entity_id": true,
+            "created": true,
+            "title": true,
+            "description": true,
+            "alt_text": true,
+            "status": true,
+            "desktop_logo_image": true,
+            "mobile_logo_image": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
