@@ -37,7 +37,7 @@ class LogoManagerExport extends Command
     private $state;
 
     /**
-     * @var CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
+     * @var \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
      */
     private $collectionFactory;
 
@@ -110,7 +110,7 @@ class LogoManagerExport extends Command
                     $logo->getTitle(),
                     $logo->getDescription(),
                     $logo->getAltText(),
-                    $logo->getEnabled(),
+                    $logo->getIsEnabled(),
                     $logo->getCreatedAt()
                 ];
             }
@@ -124,8 +124,7 @@ class LogoManagerExport extends Command
     }
 
     /**
-     * @return \Magento\Customer\Model\ResourceModel\Customer\Collection
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @return \CodingDaniel\LogoManager\Model\ResourceModel\Logo\Collection
      */
     private function getCollection()
     {
