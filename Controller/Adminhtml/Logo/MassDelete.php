@@ -1,6 +1,6 @@
 <?php
 
-namespace CodingDaniel\LogoManager\Controller\Adminhtml\LogoManager;
+namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -65,7 +65,7 @@ class MassDelete extends Action implements HttpPostActionInterface
                 __('A total of %1 record(s) have been deleted.', $logoDeleted)
             );
         }
-        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('codingdaniel/logomanager/index');
+        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('codingdaniel_logomanager/logo/index');
     }
 
 }

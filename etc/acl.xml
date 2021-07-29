@@ -2,9 +2,10 @@
 <acl>
     <resources>
         <resource id="Magento_Backend::admin">
-            <resource id="Magento_Backend::content" title="Content" sortOrder="50">
+            <resource id="Magento_Backend::content">
                 <resource id="CodingDaniel_LogoManager::menu" title="Logo Manager" sortOrder="40">
                     <resource id="CodingDaniel_LogoManager::logo_manager" title="Manage Logos" sortOrder="30"/>
+                    <resource id="CodingDaniel_LogoManager::logo_manager_categories" title="Categories" sortOrder="30"/>
                 </resource>
             </resource>
         </resource>

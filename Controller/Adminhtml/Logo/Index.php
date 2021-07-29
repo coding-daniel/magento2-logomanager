@@ -1,11 +1,11 @@
 <?php
 
-namespace CodingDaniel\LogoManager\Controller\Adminhtml\LogoManager;
+namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
-use CodingDaniel\LogoManager\Controller\Adminhtml\LogoManager;
+use CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 use Magento\Framework\App\Action\HttpGetActionInterface as HttpGetActionInterface;
 
-class Index extends LogoManager implements HttpGetActionInterface
+class Index extends Logo implements HttpGetActionInterface
 {
 
     /**

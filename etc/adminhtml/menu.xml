@@ -1,13 +1,8 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-
-        <add id="CodingDaniel_LogoManager::menu" title="Logo Manager" module="CodingDaniel_LogoManager" sortOrder="50"
-             resource="CodingDaniel_LogoManager::menu" parent="Magento_Backend::content"/>
-
-        <add id="CodingDaniel_LogoManager::logo_manager" title="Manage Logos" module="CodingDaniel_LogoManager"
-             sortOrder="10"
-             resource="CodingDaniel_LogoManager::logo_manager" action="codingdaniel/logomanager/index"
-             parent="CodingDaniel_LogoManager::menu"/>
+        <add id="CodingDaniel_LogoManager::menu" title="Logo Manager" module="CodingDaniel_LogoManager" sortOrder="50" resource="CodingDaniel_LogoManager::menu" parent="Magento_Backend::content"/>
+        <add id="CodingDaniel_LogoManager::logo_manager" title="Manage Logos" module="CodingDaniel_LogoManager" sortOrder="10" resource="CodingDaniel_LogoManager::logo_manager" action="codingdaniel_logomanager/logo/index" parent="CodingDaniel_LogoManager::menu"/>
+        <add id="CodingDaniel_LogoManager::logo_manager_categories" title="Categories" module="CodingDaniel_LogoManager" sortOrder="11" resource="CodingDaniel_LogoManager::logo_manager_categories" action="codingdaniel_logomanager/category/index" parent="CodingDaniel_LogoManager::menu"/>
     </menu>
 </config>

@@ -5,7 +5,7 @@ namespace CodingDaniel\LogoManager\Controller\Adminhtml;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 
-abstract class LogoManager extends Action
+abstract class Logo extends Action
 {
     const ACTION_RESOURCE = 'CodingDaniel_LogoManager::logo_manager';
 

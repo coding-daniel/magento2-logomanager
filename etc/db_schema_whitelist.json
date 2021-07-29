@@ -8,7 +8,22 @@
             "alt_text": true,
             "status": true,
             "desktop_logo_image": true,
-            "mobile_logo_image": true
+            "mobile_logo_image": true,
+            "is_enabled": true,
+            "created_at": true,
+            "category_select": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_2F44A7963B392612291083ABA106420B": true
+        }
+    },
+    "codingdaniel_logomanager_categories": {
+        "column": {
+            "category_id": true,
+            "title": true,
+            "is_enabled": true,
+            "created_at": true
         },
         "constraint": {
             "PRIMARY": true

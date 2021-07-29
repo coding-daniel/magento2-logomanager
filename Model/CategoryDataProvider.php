@@ -2,9 +2,9 @@
 
 namespace CodingDaniel\LogoManager\Model;
 
-use CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
+use CodingDaniel\LogoManager\Model\ResourceModel\Category\CollectionFactory;
 
-class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
+class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
 
     /**

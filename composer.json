@@ -1,12 +1,22 @@
 {
     "name": "codingdaniel/magento-logomanager",
-    "description": "",
+    "description": "Logo manager for Magento 2",
     "require": {
-        "php": ">=7.3.0"
+        "php": ">=7.3.0",
+        "magento/framework": ">=102.0.5"
     },
-    "suggest": {
-
-    },
+    "keywords": [
+        "magento",
+        "github"
+    ],
+    "homepage": "https://github.com/coding-daniel/magento-logomanager",
+    "readme": "README.md",
+    "authors": [
+        {
+            "name": "Daniel Pina",
+            "role": "Developer"
+        }
+    ],
     "type": "magento2-module",
     "version": "0.0.1",
     "license": [
@@ -27,5 +37,6 @@
                 "CodingDaniel/LogoManager"
             ]
         ]
-    }
+    },
+    "minimum-stability": "dev"
 }

@@ -2,21 +2,35 @@
 
 namespace CodingDaniel\LogoManager\Ui\Component\Listing\Column;
 
-class LogoManagerActions extends \Magento\Ui\Component\Listing\Columns\Column
+class Actions extends \Magento\Ui\Component\Listing\Columns\Column
 {
     /**
      * Url path  to edit
      *
      * @var string
      */
-    const URL_PATH_EDIT = 'codingdaniel/logomanager/edit';
+    const URL_PATH_EDIT_LOGO = 'codingdaniel_logomanager/logo/edit';
 
     /**
      * Url path  to delete
      *
      * @var string
      */
-    const URL_PATH_DELETE = 'codingdaniel/logomanager/delete';
+    const URL_PATH_DELETE_LOGO = 'codingdaniel_logomanager/logo/delete';
+
+    /**
+     * Url path  to edit
+     *
+     * @var string
+     */
+    const URL_PATH_EDIT_CAT = 'codingdaniel_logomanager/category/edit';
+
+    /**
+     * Url path  to delete
+     *
+     * @var string
+     */
+    const URL_PATH_DELETE_CAT = 'codingdaniel_logomanager/category/delete';
 
     /**
      * URL builder
@@ -61,7 +75,7 @@ class LogoManagerActions extends \Magento\Ui\Component\Listing\Columns\Column
                     $item[$this->getData('name')] = [
                         'edit'   => [
                             'href'  => $this->urlBuilder->getUrl(
-                                static::URL_PATH_EDIT,
+                                static::URL_PATH_EDIT_LOGO,
                                 [
                                     'entity_id' => $item['entity_id']
                                 ]
@@ -70,9 +84,34 @@ class LogoManagerActions extends \Magento\Ui\Component\Listing\Columns\Column
                         ],
                         'delete' => [
                             'href'    => $this->urlBuilder->getUrl(
-                                static::URL_PATH_DELETE,
+                                static::URL_PATH_DELETE_LOGO,
                                 [
                                     'entity_id' => $item['entity_id']
+                                ]
+                            ),
+                            'label'   => __('Delete'),
+                            'confirm' => [
+                                'title'   => __('Delete Logo'),
+                                'message' => __('Are you sure you want to delete the selected logo?')
+                            ]
+                        ]
+                    ];
+                } elseif (isset($item['category_id'])) {
+                    $item[$this->getData('name')] = [
+                        'edit'   => [
+                            'href'  => $this->urlBuilder->getUrl(
+                                static::URL_PATH_EDIT_CAT,
+                                [
+                                    'category_id' => $item['category_id']
+                                ]
+                            ),
+                            'label' => __('Edit')
+                        ],
+                        'delete' => [
+                            'href'    => $this->urlBuilder->getUrl(
+                                static::URL_PATH_DELETE_CAT,
+                                [
+                                    'category_id' => $item['category_id']
                                 ]
                             ),
                             'label'   => __('Delete'),

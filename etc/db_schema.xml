@@ -11,14 +11,30 @@
         <column xsi:type="text" name="description" comment="Description"/>
         <column xsi:type="text" name="alt_text" comment="Alt Text"/>
 
-        <!--<column xsi:type="varchar" name="category" nullable="false" comment="Category"/>-->
+        <column xsi:type="int" name="category_select" padding="11" unsigned="true" nullable="true" comment="Category"/>
 
-        <column xsi:type="int" name="is_enabled" padding="11" unsigned="false" default="0" nullable="false" identity="false"
-                comment="Is Enabled"/>
+        <column xsi:type="boolean" name="is_enabled" default="0" comment="Is Enabled"/>
 
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" table="codingdaniel_logomanager_logos" column="category_select"
+                    referenceTable="codingdaniel_logomanager_categories" referenceColumn="category_id"
+                    referenceId="LOGOS_CATEGORY_SELECT_CATEGORIES_CATEGORY_ID" onDelete="SET NULL"/>
+    </table>
+
+    <table name="codingdaniel_logomanager_categories" resource="default" engine="innodb" comment="Categories">
+        <column xsi:type="int" name="category_id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+
+        <column xsi:type="varchar" name="title" nullable="false" comment="Title"/>
+
+        <column xsi:type="int" name="is_enabled" padding="11" unsigned="true" default="1" nullable="false" identity="false"
+                comment="Is Enabled"/>
+
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
         </constraint>
     </table>
 </schema>

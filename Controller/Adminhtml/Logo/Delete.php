@@ -1,10 +1,10 @@
 <?php
 
-namespace CodingDaniel\LogoManager\Controller\Adminhtml\LogoManager;
+namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
-use CodingDaniel\LogoManager\Controller\Adminhtml\LogoManager;
+use CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
-class Delete extends LogoManager
+class Delete extends Logo
 {
     /**
      * Delete action
@@ -24,7 +24,7 @@ class Delete extends LogoManager
                 // display success message
                 $this->messageManager->addSuccess(__('You deleted the logo.'));
                 // go to grid
-                $this->_redirect('codingdaniel/logomanager/');
+                $this->_redirect('codingdaniel_logomanager/logo/');
                 return;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->messageManager->addError($e->getMessage());
@@ -39,13 +39,13 @@ class Delete extends LogoManager
                 // save data in session
                 $this->_getSession()->setFormData($this->getRequest()->getParams());
                 // redirect to edit form
-                $this->_redirect('codingdaniel/logomanager/edit', ['entity_id' => $logoId]);
+                $this->_redirect('codingdaniel_logomanager/logo/edit', ['entity_id' => $logoId]);
                 return;
             }
         }
         // display error message
         $this->messageManager->addError(__('We cannot find a logo to delete.'));
         // go to grid
-        $this->_redirect('codingdaniel/logomanager/');
+        $this->_redirect('codingdaniel_logomanager/logo/');
     }
 }

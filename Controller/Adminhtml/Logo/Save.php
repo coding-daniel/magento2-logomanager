@@ -1,10 +1,10 @@
 <?php
 
-namespace CodingDaniel\LogoManager\Controller\Adminhtml\LogoManager;
+namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
-use CodingDaniel\LogoManager\Controller\Adminhtml\LogoManager;
+use CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
-class Save extends LogoManager
+class Save extends Logo
 {
 
     /**

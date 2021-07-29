@@ -2,7 +2,7 @@
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">logo_manager_form.logo_manager_form_data_source</item>
+            <item name="provider" xsi:type="string">logo_manager_logo_form.logo_manager_logo_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
@@ -19,17 +19,17 @@
                 <label translate="true">Back</label>
             </button>
         </buttons>
-        <namespace>logo_manager_form</namespace>
+        <namespace>logo_manager_logo_form</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>logo_manager_form.logo_manager_form_data_source</dep>
+            <dep>logo_manager_logo_form.logo_manager_logo_form_data_source</dep>
         </deps>
     </settings>
 
-    <dataSource name="logo_manager_form_data_source">
+    <dataSource name="logo_manager_logo_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">CodingDaniel\LogoManager\Model\DataProvider</argument>
-            <argument name="name" xsi:type="string">logo_manager_form_data_source</argument>
+            <argument name="class" xsi:type="string">CodingDaniel\LogoManager\Model\LogoDataProvider</argument>
+            <argument name="name" xsi:type="string">logo_manager_logo_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
             <argument name="requestFieldName" xsi:type="string">entity_id</argument>
             <argument name="data" xsi:type="array">
@@ -149,7 +149,28 @@
             </formElements>
         </field>
 
-        <field name="is_enabled" sortOrder="25" formElement="checkbox">
+        <field name="category_select" sortOrder="25" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Category</label>
+                <dataScope>category_select</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="CodingDaniel\LogoManager\Model\Config\Source\SelectCategory"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="is_enabled" sortOrder="26" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="default" xsi:type="string">false</item>

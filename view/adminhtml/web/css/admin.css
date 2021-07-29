@@ -1,0 +1,4 @@
+/* Fixes https://github.com/magento/magento2/issues/27217 */
+.admin__menu #menu-magento-backend-content .submenu .column:only-of-type .submenu-group-title {
+    display: revert !important;
+}

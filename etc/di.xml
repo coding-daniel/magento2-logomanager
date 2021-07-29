@@ -12,7 +12,8 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="logo_manager_grid_data_source" xsi:type="string">CodingDaniel\LogoManager\Model\ResourceModel\Logo\Grid\Collection</item>
+                <item name="logo_manager_logo_grid_data_source" xsi:type="string">CodingDaniel\LogoManager\Model\ResourceModel\Logo\Grid\Collection</item>
+                <item name="logo_manager_category_grid_data_source" xsi:type="string">CodingDaniel\LogoManager\Model\ResourceModel\Category\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
@@ -24,4 +25,13 @@
             <argument name="resourceModel" xsi:type="string">CodingDaniel\LogoManager\Model\ResourceModel\Logo</argument>
         </arguments>
     </virtualType>
+
+    <virtualType name="CodingDaniel\LogoManager\Model\ResourceModel\Category\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">codingdaniel_logomanager_categories</argument>
+            <argument name="resourceModel" xsi:type="string">CodingDaniel\LogoManager\Model\ResourceModel\Category</argument>
+        </arguments>
+    </virtualType>
+
 </config>
