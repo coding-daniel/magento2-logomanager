@@ -10,9 +10,7 @@
     </argument>
     <settings>
         <buttons>
-            <!--<button name="save_and_continue" class="Magento\Banner\Block\Adminhtml\Banner\Edit\SaveAndContinueButton"/>-->
             <button name="save" class="CodingDaniel\LogoManager\Block\Adminhtml\LogoManager\Edit\SaveButton"/>
-            <!--<button name="delete" class="Magento\Banner\Block\Adminhtml\Banner\Edit\DeleteButton"/>-->
             <button name="back">
                 <url path="*/*/"/>
                 <class>back</class>
@@ -95,16 +93,12 @@
         </field>
 
         <field name="desktop_logo_image" sortOrder="23" formElement="imageUploader">
-
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">page</item>
+                    <item name="template" xsi:type="string">CodingDaniel_LogoManager/form/element/uploader/image</item>
                 </item>
             </argument>
-
             <settings>
-                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
-                <dataType>string</dataType>
                 <label translate="true">Desktop Image</label>
                 <visible>true</visible>
                 <required>false</required>
@@ -115,11 +109,10 @@
             <formElements>
                 <imageUploader>
                     <settings>
-                        <required>false</required>
                         <uploaderConfig>
-                            <param xsi:type="url" name="url" path="codingdaniel/logomanager/image_upload"/>
+                            <param xsi:type="url" name="url" path="codingdaniel_logomanager/logo/imageUpload"/>
                         </uploaderConfig>
-                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                        <previewTmpl>CodingDaniel_LogoManager/image-preview</previewTmpl>
                         <allowedExtensions>jpg jpeg gif png</allowedExtensions>
                         <maxFileSize>519000</maxFileSize>
                     </settings>
@@ -128,9 +121,15 @@
         </field>
 
         <field name="mobile_logo_image" sortOrder="24" formElement="imageUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="template" xsi:type="string">CodingDaniel_LogoManager/form/element/uploader/image</item>
+                </item>
+            </argument>
             <settings>
                 <label translate="true">Mobile Image</label>
-                <componentType>imageUploader</componentType>
+                <visible>true</visible>
+                <required>false</required>
                 <tooltip>
                     <description translate="true">Max width 400px</description>
                 </tooltip>
@@ -138,12 +137,12 @@
             <formElements>
                 <imageUploader>
                     <settings>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="codingdaniel_logomanager/logo/imageUpload"/>
+                        </uploaderConfig>
+                        <previewTmpl>CodingDaniel_LogoManager/image-preview</previewTmpl>
                         <allowedExtensions>jpg jpeg gif png</allowedExtensions>
                         <maxFileSize>219000</maxFileSize>
-                        <uploaderConfig>
-                            <param xsi:type="url" name="url" path="codingdaniel/logomanager/image_upload"/>
-                        </uploaderConfig>
-                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
                     </settings>
                 </imageUploader>
             </formElements>

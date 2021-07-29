@@ -3,6 +3,7 @@
 namespace CodingDaniel\LogoManager\Model;
 
 use CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
+use Magento\Store\Model\StoreManagerInterface;
 
 class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
@@ -11,16 +12,27 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @var array
      */
     protected $loadedData;
+    /**
+     * Store manager
+     *
+     * @var StoreManagerInterface
+     */
+    protected $storeManager;
+
+    protected $_mediaUrl;
 
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         CollectionFactory $logoCollectionFactory,
+        StoreManagerInterface $storeManager,
         array $meta = [],
         array $data = []
     ) {
         $this->collection = $logoCollectionFactory->create();
+        $this->storeManager = $storeManager;
+        $this->_mediaUrl = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
@@ -33,9 +45,30 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $items = $this->collection->getItems();
 
         foreach ($items as $item) {
-            $item->load($item->getId());
+            $_data = $item->getData();
+
+            if (isset($_data['desktop_logo_image'])) {
+
+                $image = [];
+                $image[0]['name'] = $_data['desktop_logo_image'];
+                $image[0]['url'] = $this->_mediaUrl.'logo/image/'.$_data['desktop_logo_image'];
+                $_data['desktop_logo_image'] = $image;
+
+            }
+
+            if (isset($_data['mobile_logo_image'])) {
+
+                $image = [];
+                $image[0]['name'] = $_data['mobile_logo_image'];
+                $image[0]['url'] = $this->_mediaUrl.'logo/image/'.$_data['mobile_logo_image'];
+                $_data['mobile_logo_image'] = $image;
+
+            }
+
+            $item->setData($_data);
 
             $this->loadedData[$item->getId()] = $item->getData();
+
         }
 
 

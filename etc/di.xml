@@ -9,6 +9,7 @@
         </arguments>
     </type>
 
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -17,7 +18,6 @@
             </argument>
         </arguments>
     </type>
-
     <virtualType name="CodingDaniel\LogoManager\Model\ResourceModel\Logo\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
@@ -25,7 +25,6 @@
             <argument name="resourceModel" xsi:type="string">CodingDaniel\LogoManager\Model\ResourceModel\Logo</argument>
         </arguments>
     </virtualType>
-
     <virtualType name="CodingDaniel\LogoManager\Model\ResourceModel\Category\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
@@ -33,5 +32,18 @@
             <argument name="resourceModel" xsi:type="string">CodingDaniel\LogoManager\Model\ResourceModel\Category</argument>
         </arguments>
     </virtualType>
+
+
+    <virtualType name="CodingDaniel\LogoManager\ReferenceImageUpload" type="CodingDaniel\LogoManager\Model\Image">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">logo/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">logo/image</argument>
+        </arguments>
+    </virtualType>
+    <type name="CodingDaniel\LogoManager\Controller\Adminhtml\Logo\ImageUpload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">CodingDaniel\LogoManager\ReferenceImageUpload</argument>
+        </arguments>
+    </type>
 
 </config>

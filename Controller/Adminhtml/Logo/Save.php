@@ -3,18 +3,24 @@
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
 use CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
+use CodingDaniel\LogoManager\Model\Image;
 
 class Save extends Logo
 {
 
+    protected $imageUploader;
+
     /**
      * @param \Magento\Backend\App\Action\Context $context
+     * @param \CodingDaniel\LogoManager\Model\Image
      * @param \Magento\Framework\Registry $registry
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
+        Image $image,
         \Magento\Framework\Registry $registry
     ) {
+        $this->imageUploader = $image;
         parent::__construct($context, $registry);
     }
 
@@ -22,9 +28,42 @@ class Save extends Logo
     {
 
         $data = $this->getRequest()->getPostValue();
+
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
+
         if ($data) {
+
+            if (
+                isset($data['desktop_logo_image'][0]['name']) &&
+                isset($data['desktop_logo_image'][0]['tmp_name'])
+            ) {
+                $data['desktop_logo_image'] = $data['desktop_logo_image'][0]['name'];
+                $this->imageUploader->moveFileFromTmp($data['desktop_logo_image']);
+            } elseif (
+                isset($data['desktop_logo_image'][0]['name']) &&
+                !isset($data['desktop_logo_image'][0]['tmp_name'])
+            ) {
+                $data['desktop_logo_image'] = $data['desktop_logo_image'][0]['name'];
+            } else {
+                $data['desktop_logo_image'] = '';
+            }
+
+            if (
+                isset($data['mobile_logo_image'][0]['name']) &&
+                isset($data['mobile_logo_image'][0]['tmp_name'])
+            ) {
+                $data['mobile_logo_image'] = $data['mobile_logo_image'][0]['name'];
+                $this->imageUploader->moveFileFromTmp($data['mobile_logo_image']);
+            } elseif (
+                isset($data['mobile_logo_image'][0]['name']) &&
+                !isset($data['mobile_logo_image'][0]['tmp_name'])
+            ) {
+                $data['mobile_logo_image'] = $data['mobile_logo_image'][0]['name'];
+            } else {
+                $data['mobile_logo_image'] = '';
+            }
+
 
             $model = $this->_objectManager->create('CodingDaniel\LogoManager\Model\Logo');
 

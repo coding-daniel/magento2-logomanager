@@ -1,15 +1,15 @@
-<div class="file-uploader-summary">
-    <div class="file-uploader-preview">
-        <a class="preview-link"
-           css="'preview-' + $file.previewType"
-           attr="href: $parent.getFilePreview($file), title: $file.name" target="_blank">
+<div class="file-uploader-summary image-uploader">
+    <div class="file-uploader-preview image-uploader-preview">
+        <a class="image-uploader-preview-link" attr="href: $parent.getFilePreview($file)" target="_blank">
+            <div class="file-uploader-spinner image-uploader-spinner" />
             <img
-                if="$file.previewType === 'image'"
+                class="preview-image"
                 tabindex="0"
                 event="load: $parent.onPreviewLoad.bind($parent)"
                 attr="
                     src: $parent.getFilePreview($file),
-                    alt: $file.name">
+                    alt: $file.name,
+                    title: $file.name">
         </a>
 
         <div class="actions">
@@ -18,6 +18,7 @@
                 class="action-remove"
                 data-role="delete-button"
                 attr="title: $t('Delete image')"
+                disable="$parent.disabled"
                 click="$parent.removeFile.bind($parent, $file)">
                 <span translate="'Delete image'"/>
             </button>
@@ -25,13 +26,7 @@
     </div>
 
     <div class="file-uploader-filename" text="$file.name"/>
-
     <div class="file-uploader-meta">
-        <span if="$file.previewType === 'image'">
-            <text args="$file.previewWidth"/>x<text args="$file.previewHeight"/>,
-        </span>
-        <text args="$parent.formatSize($file.size)"/>
+        <text args="$file.previewWidth"/>x<text args="$file.previewHeight"/>
     </div>
 </div>
-
-

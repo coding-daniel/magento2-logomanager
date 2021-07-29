@@ -1,5 +1,5 @@
 {
-    "name": "codingdaniel/magento-logomanager",
+    "name": "codingdaniel/magento2-logomanager",
     "description": "Logo manager for Magento 2",
     "require": {
         "php": ">=7.3.0",
@@ -29,14 +29,6 @@
         "psr-4": {
             "CodingDaniel\\LogoManager\\": ""
         }
-    },
-    "extra": {
-        "map": [
-            [
-                "*",
-                "CodingDaniel/LogoManager"
-            ]
-        ]
     },
     "minimum-stability": "dev"
 }
