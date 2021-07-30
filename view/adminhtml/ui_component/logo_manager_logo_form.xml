@@ -102,9 +102,9 @@
                 <label translate="true">Desktop Image</label>
                 <visible>true</visible>
                 <required>false</required>
-                <tooltip>
-                    <description translate="true">Max width 400px</description>
-                </tooltip>
+                <!--<tooltip>-->
+                    <!--<description translate="true">Max width 400px</description>-->
+                <!--</tooltip>-->
             </settings>
             <formElements>
                 <imageUploader>
@@ -130,9 +130,9 @@
                 <label translate="true">Mobile Image</label>
                 <visible>true</visible>
                 <required>false</required>
-                <tooltip>
-                    <description translate="true">Max width 400px</description>
-                </tooltip>
+                <!--<tooltip>-->
+                    <!--<description translate="true">Max width 400px</description>-->
+                <!--</tooltip>-->
             </settings>
             <formElements>
                 <imageUploader>

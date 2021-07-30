@@ -4,9 +4,11 @@
         <label>Logo Listing</label>
         <description>Logo manager</description>
         <parameters>
+
             <parameter name="header" sort_order="10" visible="true" xsi:type="text">
                 <label>Custom header</label>
             </parameter>
+
             <parameter name="size" xsi:type="select" visible="true" required="false" sort_order="20">
                 <label translate="true">Size</label>
                 <options>
@@ -30,10 +32,24 @@
                     </option>
                 </options>
             </parameter>
+
+            <parameter name="autoplay" xsi:type="select" visible="true" required="true" sort_order="20">
+                <label translate="true">Autoplay</label>
+                <options>
+                    <option name="yes" value="true" selected="true">
+                        <label>Yes</label>
+                    </option>
+                    <option name="no" value="false">
+                        <label>No</label>
+                    </option>
+                </options>
+            </parameter>
+
             <parameter name="category_id" xsi:type="select" required="false" visible="true"
                        source_model="CodingDaniel\LogoManager\Model\Config\Source\WidgetCategory">
                 <label translate="true">Category</label>
             </parameter>
+
         </parameters>
     </widget>
 </widgets>

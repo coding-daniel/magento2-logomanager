@@ -51,7 +51,7 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
                 $image = [];
                 $image[0]['name'] = $_data['desktop_logo_image'];
-                $image[0]['url'] = $this->_mediaUrl.'logo/image/'.$_data['desktop_logo_image'];
+                $image[0]['url'] = $this->_mediaUrl.'logomanager/image/'.$_data['desktop_logo_image'];
                 $_data['desktop_logo_image'] = $image;
 
             }
@@ -60,7 +60,7 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
                 $image = [];
                 $image[0]['name'] = $_data['mobile_logo_image'];
-                $image[0]['url'] = $this->_mediaUrl.'logo/image/'.$_data['mobile_logo_image'];
+                $image[0]['url'] = $this->_mediaUrl.'logomanager/image/'.$_data['mobile_logo_image'];
                 $_data['mobile_logo_image'] = $image;
 
             }

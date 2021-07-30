@@ -12,6 +12,7 @@ use Magento\Framework\App\State;
 
 use CodingDaniel\LogoManager\Model\Logo;
 use CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
+use CodingDaniel\LogoManager\Model\ResourceModel\Category;
 
 class LogoManagerExport extends Command
 {
@@ -25,6 +26,11 @@ class LogoManagerExport extends Command
      * @var Logo
      */
     private $logo;
+
+    /**
+     * @var Category
+     */
+    private $category;
 
     /**
      * @var DirectoryList
@@ -47,6 +53,7 @@ class LogoManagerExport extends Command
         CollectionFactory $collectionFactory,
         Csv $csv,
         Logo $logo,
+        Category $category,
         DirectoryList $directoryList,
         State $state
     ) {
@@ -54,6 +61,7 @@ class LogoManagerExport extends Command
         $this->collectionFactory = $collectionFactory;
         $this->csv = $csv;
         $this->logo = $logo;
+        $this->category = $category;
         $this->directoryList = $directoryList;
         $this->state = $state;
     }
@@ -104,12 +112,17 @@ class LogoManagerExport extends Command
 
             /** @var Logo $logo */
             foreach ($this->collection as $logo) {
+                $category_id = $logo->getCategorySelect();
+                $categoryName = $this->category->getCategoryNameById($category_id);
                 /** Build your Data array */
                 $exportData[] = [
                     $logo->getEntityId(),
                     $logo->getTitle(),
                     $logo->getDescription(),
                     $logo->getAltText(),
+                    $logo->getDesktopLogoImage(),
+                    $logo->getMobileLogoImage(),
+                    $categoryName,
                     $logo->getIsEnabled(),
                     $logo->getCreatedAt()
                 ];
@@ -142,6 +155,9 @@ class LogoManagerExport extends Command
             'Title',
             'Description',
             'Alt Text',
+            'Desktop Image',
+            'Mobile Image',
+            'Category',
             'Enabled',
             'Created'
         ];

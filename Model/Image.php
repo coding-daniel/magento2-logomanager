@@ -18,9 +18,9 @@ use Psr\Log\LoggerInterface;
 class Image
 {
 
-    const IMAGE_TMP_PATH = 'logo/tmp/image';
+    const IMAGE_TMP_PATH = 'logomanager/tmp/image';
 
-    const IMAGE_PATH = 'logo/image';
+    const IMAGE_PATH = 'logomanager/image';
     /**
      * Core file storage database
      *

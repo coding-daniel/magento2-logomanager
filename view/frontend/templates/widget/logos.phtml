@@ -1,29 +1,58 @@
-<?php if($block->getData('header')): $hs = $block->getData('size') ?>
-    <<?= $hs ?> class='posts'><?php echo $block->getData('header'); ?></<?= $hs ?>>
+<?php if($header = $block->getData('header')): $hs = $block->getData('size') ?>
+    <<?= $hs ?> class='logos-header'><?= $header ?></<?= $hs ?>>
 <?php endif; ?>
+
 <?php $catId = $block->getData('category_id') ?: null; ?>
-<?php if ($logos = $block->getLogos($catId)): ?>
-<section>
-    <ul class="my-list" data-slick='{"slidesToScroll": 1}'>
+
+<?php if ($logos = $block->getLogosCollection($catId)): ?>
+<section class="logomanager-widget-section">
+    <ul class="logomanager-carousel" data-slick='{"autoplay": <?php echo $block->getData('autoplay') ?: true ; ?>}'>
     <?php foreach ($logos as $logo): ?>
-        <li><?= $logo->getTitle() ?></li>
+        <li class="logomanager-list-item">
+            <div class="logomanager-logo">
+                <p class="logo-header"><?= $logo->getTitle() ?></p>
+                <?php if($imageName = $logo->getData('desktop_logo_image')) : $imgUrl = $block->resize($imageName, 300); ?>
+                <?php
+                if($imageNameSmall = $logo->getData('mobile_logo_image')) {
+                    $imgUrlSmall = $block->resize($imageNameSmall, 200, 200);
+                } else {
+                    $imgUrlSmall = '';
+                }
+                ?>
+                <span class="logo-image-container">
+                    <span class="logo-image-wrapper">
+                        <img src="<?= $imgUrl; ?>"
+                            srcset="
+                            <?= $imgUrl; ?>  1x,
+                            <?= $imgUrlSmall; ?> 2x"
+                             alt="<?= $logo->getAltText() ?>" />
+                    </span>
+                </span>
+
+                <p class="logo-manager-description"><?= $logo->getDescription() ?></p>
+                <?php endif; ?>
+            </div>
+
+        </li>
     <?php endforeach; ?>
     </ul>
+
 </section>
+
 <script>
     require([
         'jquery',
         'slick',
         'domReady!'
     ], function ($) {
-        $(".my-list").slick({
+        $(".logomanager-carousel").slick({
             dots: false,
             arrows: false,
             infinite: true,
             speed: 800,
-            autoplay: true,
             autoplaySpeed: 4000,
             slidesToShow: 4,
+            slidesToScroll: 1,
             responsive: [{
                 breakpoint: 1024,
                 settings: {

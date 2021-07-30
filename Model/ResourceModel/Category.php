@@ -14,4 +14,22 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
         $this->_init('codingdaniel_logomanager_categories', 'category_id');
     }
 
+    /**
+     * Retrieves Category Name from DB by id.
+     *
+     * @param $id
+     * @return string
+     * @throws
+     */
+    public function getCategoryNameById($id)
+    {
+        $adapter = $this->getConnection();
+        $select = $adapter->select()
+            ->from($this->getMainTable(), 'title')
+            ->where('category_id = :category_id');
+        $binds = ['category_id' => (int)$id];
+
+        return $adapter->fetchOne($select, $binds);
+    }
+
 }

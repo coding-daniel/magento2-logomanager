@@ -2,5 +2,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
     <head>
         <css src="CodingDaniel_LogoManager::css/slick.css" />
+        <css src="CodingDaniel_LogoManager::css/logomanager.css" />
     </head>
 </page>

@@ -1,0 +1,37 @@
+.logo-image-wrapper {
+    padding-bottom: 50%;
+    display: block;
+    height: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-image-wrapper img {
+    bottom: 0;
+    display: block;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.logomanager-list-item {
+    margin: 0 5px;
+}
+
+.logo-manager-description {
+    margin-top: 10px;
+}
+
+.logo-header {
+    font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+    .logomanager-carousel {
+        padding-left: 0;
+    }
+}

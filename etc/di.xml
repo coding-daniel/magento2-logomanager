@@ -36,8 +36,8 @@
 
     <virtualType name="CodingDaniel\LogoManager\ReferenceImageUpload" type="CodingDaniel\LogoManager\Model\Image">
         <arguments>
-            <argument name="baseTmpPath" xsi:type="string">logo/tmp/image</argument>
-            <argument name="basePath" xsi:type="string">logo/image</argument>
+            <argument name="baseTmpPath" xsi:type="string">logomanager/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">logomanager/image</argument>
         </arguments>
     </virtualType>
     <type name="CodingDaniel\LogoManager\Controller\Adminhtml\Logo\ImageUpload">
