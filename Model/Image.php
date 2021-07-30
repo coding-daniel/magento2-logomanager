@@ -21,6 +21,7 @@ class Image
     const IMAGE_TMP_PATH = 'logomanager/tmp/image';
 
     const IMAGE_PATH = 'logomanager/image';
+
     /**
      * Core file storage database
      *

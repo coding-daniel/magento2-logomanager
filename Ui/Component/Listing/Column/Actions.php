@@ -117,7 +117,7 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
                             'label'   => __('Delete'),
                             'confirm' => [
                                 'title'   => __('Delete Logo'),
-                                'message' => __('Are you sure you want to delete the selected logo?')
+                                'message' => __('Are you sure you want to delete the selected category?')
                             ]
                         ]
                     ];

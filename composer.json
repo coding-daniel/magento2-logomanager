@@ -18,10 +18,8 @@
         }
     ],
     "type": "magento2-module",
-    "version": "0.0.1",
-    "license": [
-
-    ],
+    "version": "1.0.0",
+    "license": ["The Unlicense"],
     "autoload": {
         "files": [
             "registration.php"

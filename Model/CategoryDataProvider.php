@@ -16,11 +16,11 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        CollectionFactory $logoCollectionFactory,
+        CollectionFactory $categoryCollectionFactory,
         array $meta = [],
         array $data = []
     ) {
-        $this->collection = $logoCollectionFactory->create();
+        $this->collection = $categoryCollectionFactory->create();
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 

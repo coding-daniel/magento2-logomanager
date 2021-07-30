@@ -33,7 +33,7 @@
                 </options>
             </parameter>
 
-            <parameter name="autoplay" xsi:type="select" visible="true" required="true" sort_order="20">
+            <parameter name="autoplay" xsi:type="select" visible="true" required="true" sort_order="21">
                 <label translate="true">Autoplay</label>
                 <options>
                     <option name="yes" value="true" selected="true">
@@ -46,7 +46,7 @@
             </parameter>
 
             <parameter name="category_id" xsi:type="select" required="false" visible="true"
-                       source_model="CodingDaniel\LogoManager\Model\Config\Source\WidgetCategory">
+                       source_model="CodingDaniel\LogoManager\Model\Config\Source\WidgetCategory" sort_order="22">
                 <label translate="true">Category</label>
             </parameter>
 

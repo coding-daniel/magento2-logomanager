@@ -18,3 +18,5 @@ Then require with `composer require codingdaniel/magento2-logomanager`
 CLI commando to export logos in to a CSV file
 
 `bin/magento codingdaniel:logomanager:exportlogos`
+
+Files are stored in the `var` directory
