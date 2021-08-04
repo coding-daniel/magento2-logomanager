@@ -3,9 +3,33 @@
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Category;
 
 use CodingDaniel\LogoManager\Controller\Adminhtml\Category;
+use Magento\Backend\App\Action\Context;
 
 class Delete extends Category
 {
+
+    /**
+     * @var \CodingDaniel\LogoManager\Model\Category
+     */
+    protected $_category;
+
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $_logger;
+
+    public function __construct(
+        Context $context,
+        \Magento\Framework\Registry $registry,
+        \CodingDaniel\LogoManager\Model\Category $category,
+        \Psr\Log\LoggerInterface $logger
+    )
+    {
+        $this->_category = $category;
+        $this->_logger = $logger;
+        parent::__construct($context, $registry, $category);
+    }
+
     /**
      * Delete action
      *
@@ -17,10 +41,8 @@ class Delete extends Category
         $logoId = $this->getRequest()->getParam('category_id');
         if ($logoId) {
             try {
-                // init model and delete
-                $model = $this->_objectManager->create(\CodingDaniel\LogoManager\Model\Category::class);
-                $model->load($logoId);
-                $model->delete();
+                $this->_category->load($logoId);
+                $this->_category->delete();
                 // display success message
                 $this->messageManager->addSuccess(__('You deleted the category.'));
                 // go to grid
@@ -35,7 +57,7 @@ class Delete extends Category
                         . 'Please review the action log and try again.'
                     )
                 );
-                $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($e);
+                $this->_logger->critical($e);
                 // save data in session
                 $this->_getSession()->setFormData($this->getRequest()->getParams());
                 // redirect to edit form

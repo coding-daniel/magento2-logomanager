@@ -6,6 +6,32 @@ use CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
 class Delete extends Logo
 {
+
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $_logger;
+
+    /**
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Logo
+     * @param \Psr\Log\LoggerInterface $logger
+     */
+    public function __construct(
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Framework\Registry $registry,
+        \CodingDaniel\LogoManager\Model\Logo $logo,
+        \Psr\Log\LoggerInterface $logger
+    )
+    {
+        $this->_registry = $registry;
+        $this->_logo = $logo;
+        $this->_logger = $logger;
+        parent::__construct($context, $registry, $logo);
+    }
+
+
     /**
      * Delete action
      *
@@ -17,10 +43,8 @@ class Delete extends Logo
         $logoId = $this->getRequest()->getParam('entity_id');
         if ($logoId) {
             try {
-                // init model and delete
-                $model = $this->_objectManager->create(\CodingDaniel\LogoManager\Model\Logo::class);
-                $model->load($logoId);
-                $model->delete();
+                $this->_logo->load($logoId);
+                $this->_logo->delete();
                 // display success message
                 $this->messageManager->addSuccess(__('You deleted the logo.'));
                 // go to grid
@@ -35,7 +59,7 @@ class Delete extends Logo
                         . 'Please review the action log and try again.'
                     )
                 );
-                $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($e);
+                $this->_logger->critical($e);
                 // save data in session
                 $this->_getSession()->setFormData($this->getRequest()->getParams());
                 // redirect to edit form

@@ -17,16 +17,24 @@ abstract class Category extends Action
     protected $_registry = null;
 
     /**
+     * @var \CodingDaniel\LogoManager\Model\Category
+     */
+    protected $_category;
+
+    /**
      * LogoManager constructor.
      *
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Category
      */
     public function __construct(
         Context $context,
-        \Magento\Framework\Registry $registry
+        \Magento\Framework\Registry $registry,
+        \CodingDaniel\LogoManager\Model\Category $category
     )
     {
+        $this->_category = $category;
         $this->_registry = $registry;
         parent::__construct($context);
     }
@@ -51,15 +59,13 @@ abstract class Category extends Action
     {
         $categoryId = (int)$this->getRequest()->getParam($idFieldName);
 
-        $model = $this->_objectManager->create(\CodingDaniel\LogoManager\Model\Category::class);
-
         if ($categoryId) {
-            $model->load($categoryId);
+            $this->_category->load($categoryId);
         }
 
         if (!$this->_registry->registry('current_category')) {
-            $this->_registry->register('current_category', $model);
+            $this->_registry->register('current_category', $this->_category);
         }
-        return $model;
+        return $this->_category;
     }
 }

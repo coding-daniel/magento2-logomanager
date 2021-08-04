@@ -17,17 +17,25 @@ abstract class Logo extends Action
     protected $_registry = null;
 
     /**
+     * @var \CodingDaniel\LogoManager\Model\Logo
+     */
+    protected $_logo;
+
+    /**
      * LogoManager constructor.
      *
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Logo
      */
     public function __construct(
         Context $context,
-        \Magento\Framework\Registry $registry
+        \Magento\Framework\Registry $registry,
+        \CodingDaniel\LogoManager\Model\Logo $logo
     )
     {
         $this->_registry = $registry;
+        $this->_logo = $logo;
         parent::__construct($context);
     }
 
@@ -51,16 +59,14 @@ abstract class Logo extends Action
     {
         $logoId = (int)$this->getRequest()->getParam($idFieldName);
 
-        $model = $this->_objectManager->create(\CodingDaniel\LogoManager\Model\Logo::class);
-
         if ($logoId) {
-            $model->load($logoId);
+            $this->_logo->load($logoId);
         }
 
         if (!$this->_registry->registry('current_logo')) {
-            $this->_registry->register('current_logo', $model);
+            $this->_registry->register('current_logo', $this->_logo);
         }
-        return $model;
+        return $this->_logo;
     }
 
     /**

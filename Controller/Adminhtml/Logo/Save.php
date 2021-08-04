@@ -10,18 +10,28 @@ class Save extends Logo
 
     protected $imageUploader;
 
+    protected $_logo;
+
+    protected $_session;
+
     /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \CodingDaniel\LogoManager\Model\Image
      * @param \Magento\Framework\Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Logo $logo
+     * @param \Magento\Backend\Model\Session $session
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         Image $image,
-        \Magento\Framework\Registry $registry
+        \Magento\Framework\Registry $registry,
+        \CodingDaniel\LogoManager\Model\Logo $logo,
+        \Magento\Backend\Model\Session $session
     ) {
         $this->imageUploader = $image;
-        parent::__construct($context, $registry);
+        $this->_logo = $logo;
+        $this->_session = $session;
+        parent::__construct($context, $registry, $logo);
     }
 
     public function execute()
@@ -64,22 +74,19 @@ class Save extends Logo
                 $data['mobile_logo_image'] = '';
             }
 
-
-            $model = $this->_objectManager->create('CodingDaniel\LogoManager\Model\Logo');
-
             $id = $this->getRequest()->getParam('entity_id');
             if ($id) {
-                $model->load($id);
+                $this->_logo->load($id);
             }
 
-            $model->setData($data);
+            $this->_logo->setData($data);
 
             try {
-                $model->save();
+                $this->_logo->save();
                 $this->messageManager->addSuccess(__('You saved this Logo.'));
-                $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData(false);
+                $this->_session->setFormData(false);
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['entity_id' => $model->getId(), '_current' => true]);
+                    return $resultRedirect->setPath('*/*/edit', ['entity_id' => $this->_logo->getId(), '_current' => true]);
                 }
                 return $resultRedirect->setPath('*/*/');
             } catch (\Magento\Framework\Exception\LocalizedException $e) {

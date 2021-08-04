@@ -8,14 +8,29 @@ class Save extends Category
 {
 
     /**
+     * @var \CodingDaniel\LogoManager\Model\Category
+     */
+    protected $_category;
+
+    /**
+     * @var \CodingDaniel\LogoManager\Model\Category
+     */
+    protected $_session;
+
+    /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Category $category
+     * @param \Magento\Backend\Model\Session $session
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $registry
+        \Magento\Framework\Registry $registry,
+        \CodingDaniel\LogoManager\Model\Category $category,
+        \Magento\Backend\Model\Session $session
     ) {
-        parent::__construct($context, $registry);
+        $this->_session = $session;
+        parent::__construct($context, $registry, $category);
     }
 
     public function execute()
@@ -26,21 +41,19 @@ class Save extends Category
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
 
-            $model = $this->_objectManager->create('CodingDaniel\LogoManager\Model\Category');
-
             $id = $this->getRequest()->getParam('category_id');
             if ($id) {
-                $model->load($id);
+                $this->_category->load($id);
             }
 
-            $model->setData($data);
+            $this->_category->setData($data);
 
             try {
-                $model->save();
+                $this->_category->save();
                 $this->messageManager->addSuccess(__('You saved this category.'));
-                $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData(false);
+                $this->_session->setFormData(false);
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['category_id' => $model->getId(), '_current' => true]);
+                    return $resultRedirect->setPath('*/*/edit', ['category_id' => $this->_category->getId(), '_current' => true]);
                 }
                 return $resultRedirect->setPath('*/*/');
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
