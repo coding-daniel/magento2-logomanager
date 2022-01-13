@@ -24,9 +24,9 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
     /**
      * LogoDataProvider constructor.
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param CollectionFactory $logoCollectionFactory
      * @param StoreManagerInterface $storeManager
      * @param array $meta
