@@ -9,3 +9,7 @@
 1.0.2
 =============
 * Replaced Object Manager for constructor dependency
+
+1.0.3
+=============
+* Improved PHPDocs

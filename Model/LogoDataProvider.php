@@ -12,6 +12,7 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @var array
      */
     protected $loadedData;
+
     /**
      * Store manager
      *
@@ -21,6 +22,17 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
     protected $_mediaUrl;
 
+    /**
+     * LogoDataProvider constructor.
+     * @param $name
+     * @param $primaryFieldName
+     * @param $requestFieldName
+     * @param CollectionFactory $logoCollectionFactory
+     * @param StoreManagerInterface $storeManager
+     * @param array $meta
+     * @param array $data
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function __construct(
         $name,
         $primaryFieldName,
@@ -36,6 +48,9 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
+    /**
+     * @return array
+     */
     public function getData()
     {
         if (isset($this->loadedData)) {

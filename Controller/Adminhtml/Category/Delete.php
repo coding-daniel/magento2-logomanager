@@ -18,6 +18,13 @@ class Delete extends Category
      */
     protected $_logger;
 
+    /**
+     * Delete constructor.
+     * @param Context $context
+     * @param \Magento\Framework\Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Category $category
+     * @param \Psr\Log\LoggerInterface $logger
+     */
     public function __construct(
         Context $context,
         \Magento\Framework\Registry $registry,

@@ -6,17 +6,28 @@ use Magento\Widget\Block\BlockInterface;
 
 class Logo extends Template implements BlockInterface {
 
+    /**
+     * @var string
+     */
     protected $_template = "widget/logos.phtml";
 
+    /**
+     * @var \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory
+     */
     protected $_collection;
 
+    /**
+     * @var \Magento\Framework\Image\AdapterFactory
+     */
     protected $_imageFactory;
 
+    /**
+     * @var \Magento\Framework\Filesystem
+     */
     protected $_filesystem;
 
     /**
-     * Constructor
-     *
+     * Logo constructor.
      * @param Template\Context $context
      * @param \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory $collectionFactory
      * @param \Magento\Framework\Image\AdapterFactory $imageFactory
@@ -37,6 +48,10 @@ class Logo extends Template implements BlockInterface {
         $this->_filesystem = $filesystem;
     }
 
+    /**
+     * @param null $cat
+     * @return \CodingDaniel\LogoManager\Model\ResourceModel\Logo\Collection
+     */
     public function getLogosCollection($cat = null) {
         $collection = $this->_collection->create();
         $collection->addFieldToFilter('is_enabled', ['eq' => 1]);
@@ -44,7 +59,13 @@ class Logo extends Template implements BlockInterface {
         return $collection;
     }
 
-
+    /**
+     * @param $image
+     * @param null $width
+     * @param null $height
+     * @return bool|string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function resize($image, $width = null, $height = null) {
 
         $absolutePath = $this->_filesystem->getDirectoryRead(

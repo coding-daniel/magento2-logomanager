@@ -10,6 +10,9 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
 
+    /**
+     * @return array
+     */
     public function getButtonData()
     {
         $data = [];
@@ -26,6 +29,9 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
         return $data;
     }
 
+    /**
+     * @return string
+     */
     public function getDeleteUrl()
     {
         return $this->getUrl('*/*/delete', ['entity_id' => $this->getLogoId()]);

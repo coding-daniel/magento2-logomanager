@@ -47,8 +47,20 @@ class LogoManagerExport extends Command
      */
     private $collectionFactory;
 
+    /**
+     * @var
+     */
     private $collection;
 
+    /**
+     * LogoManagerExport constructor.
+     * @param CollectionFactory $collectionFactory
+     * @param Csv $csv
+     * @param Logo $logo
+     * @param Category $category
+     * @param DirectoryList $directoryList
+     * @param State $state
+     */
     public function __construct(
         CollectionFactory $collectionFactory,
         Csv $csv,
@@ -78,12 +90,9 @@ class LogoManagerExport extends Command
     }
 
     /**
-     * Execute the command
-     *
      * @param InputInterface $input
      * @param OutputInterface $output
-     *
-     * @return null|int
+     * @return int|void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -102,6 +111,10 @@ class LogoManagerExport extends Command
 
     }
 
+    /**
+     * @throws \Magento\Framework\Exception\FileSystemException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     private function exportCsvFile()
     {
         $this->getCollection();

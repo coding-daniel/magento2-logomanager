@@ -7,11 +7,19 @@ use CodingDaniel\LogoManager\Model\Image;
 
 class Save extends Logo
 {
-
+    /**
+     * @var Image
+     */
     protected $imageUploader;
 
+    /**
+     * @var \CodingDaniel\LogoManager\Model\Logo
+     */
     protected $_logo;
 
+    /**
+     * @var \Magento\Backend\Model\Session
+     */
     protected $_session;
 
     /**
@@ -34,6 +42,10 @@ class Save extends Logo
         parent::__construct($context, $registry, $logo);
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     public function execute()
     {
 

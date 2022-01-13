@@ -12,6 +12,15 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      */
     protected $loadedData;
 
+    /**
+     * CategoryDataProvider constructor.
+     * @param $name
+     * @param $primaryFieldName
+     * @param $requestFieldName
+     * @param CollectionFactory $categoryCollectionFactory
+     * @param array $meta
+     * @param array $data
+     */
     public function __construct(
         $name,
         $primaryFieldName,
@@ -24,6 +33,9 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
+    /**
+     * @return array
+     */
     public function getData()
     {
         if (isset($this->loadedData)) {

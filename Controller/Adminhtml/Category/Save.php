@@ -33,6 +33,9 @@ class Save extends Category
         parent::__construct($context, $registry, $category);
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
 

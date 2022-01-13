@@ -10,6 +10,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements \Magent
         $this->_init('CodingDaniel\LogoManager\Model\ResourceModel\Category');
     }
 
+    /**
+     * @return array|string[]
+     */
     public function getIdentities() {
         return [self::CACHE_TAG . '_' . $this->getId()];
     }

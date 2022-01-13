@@ -4,6 +4,10 @@ namespace CodingDaniel\LogoManager\Model\ResourceModel;
 
 class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
 
+    /**
+     * Category constructor.
+     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context
     ) {
@@ -16,10 +20,9 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
 
     /**
      * Retrieves Category Name from DB by id.
-     *
      * @param $id
      * @return string
-     * @throws
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getCategoryNameById($id)
     {

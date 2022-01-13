@@ -27,7 +27,6 @@ class ImageUpload extends Action implements HttpPostActionInterface
      */
     protected $collectionFactory;
 
-
     /**
      * @var \Magento\Ui\Component\MassAction\Filter
      */
@@ -47,6 +46,9 @@ class ImageUpload extends Action implements HttpPostActionInterface
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         $imageId = $this->_request->getParam('param_name', 'image');

@@ -60,7 +60,6 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
-
     /**
      * Prepare Data Source
      *

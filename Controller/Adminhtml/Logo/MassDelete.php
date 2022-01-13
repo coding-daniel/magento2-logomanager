@@ -48,6 +48,11 @@ class MassDelete extends Action implements HttpPostActionInterface
         parent::__construct($context);
     }
 
+    /**
+     * @return Redirect
+     * @throws NotFoundException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     public function execute(): Redirect
     {
         if (!$this->getRequest()->isPost()) {

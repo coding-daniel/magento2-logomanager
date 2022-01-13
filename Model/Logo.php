@@ -10,6 +10,9 @@ class Logo extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         $this->_init('CodingDaniel\LogoManager\Model\ResourceModel\Logo');
     }
 
+    /**
+     * @return array|string[]
+     */
     public function getIdentities() {
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
