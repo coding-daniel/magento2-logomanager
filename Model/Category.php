@@ -17,7 +17,7 @@ class Category extends AbstractModel implements IdentityInterface
      */
     protected function _construct()
     {
-        $this->_init(CodingDaniel\LogoManager\Model\ResourceModel\Category::class);
+        $this->_init(ResourceModel\Category::class);
     }
 
     /**

@@ -72,21 +72,17 @@ class LogoDataProvider extends AbstractDataProvider
             $_data = $item->getData();
 
             if (isset($_data['desktop_logo_image'])) {
-
                 $image = [];
                 $image[0]['name'] = $_data['desktop_logo_image'];
-                $image[0]['url'] = $this->_mediaUrl.'logomanager/image/'.$_data['desktop_logo_image'];
+                $image[0]['url'] = $this->_mediaUrl . 'logomanager/image/' . $_data['desktop_logo_image'];
                 $_data['desktop_logo_image'] = $image;
-
             }
 
             if (isset($_data['mobile_logo_image'])) {
-
                 $image = [];
                 $image[0]['name'] = $_data['mobile_logo_image'];
-                $image[0]['url'] = $this->_mediaUrl.'logomanager/image/'.$_data['mobile_logo_image'];
+                $image[0]['url'] = $this->_mediaUrl . 'logomanager/image/' . $_data['mobile_logo_image'];
                 $_data['mobile_logo_image'] = $image;
-
             }
 
             $item->setData($_data);

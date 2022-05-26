@@ -17,7 +17,7 @@ class Logo extends AbstractModel implements IdentityInterface
      */
     protected function _construct()
     {
-        $this->_init(CodingDaniel\LogoManager\Model\ResourceModel\Logo::class);
+        $this->_init(ResourceModel\Logo::class);
     }
 
     /**
