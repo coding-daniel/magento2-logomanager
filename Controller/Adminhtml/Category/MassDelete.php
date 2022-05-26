@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Category;
 
@@ -18,25 +18,25 @@ class MassDelete extends Action implements HttpPostActionInterface
     /**
      * Authorization level
      */
-    const ADMIN_RESOURCE = 'CodingDaniel_LogoManager::logo_manager_categories';
+    public const ADMIN_RESOURCE = 'CodingDaniel_LogoManager::logo_manager_categories';
 
     /**
-     * @var \CodingDaniel\LogoManager\Model\ResourceModel\Category\CollectionFactory
+     * @var CollectionFactory
      */
-    protected $collectionFactory;
+    protected CollectionFactory $collectionFactory;
 
 
     /**
-     * @var \Magento\Ui\Component\MassAction\Filter
+     * @var Filter
      */
-    protected $filter;
+    protected Filter $filter;
 
     /**
      * Constructor
      *
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Ui\Component\MassAction\Filter $filter
-     * @param \CodingDaniel\LogoManager\Model\ResourceModel\Category\CollectionFactory $collectionFactory
+     * @param Filter $filter
+     * @param CollectionFactory $collectionFactory
      */
     public function __construct(
         Context $context,
@@ -49,6 +49,8 @@ class MassDelete extends Action implements HttpPostActionInterface
     }
 
     /**
+     * Execute method
+     *
      * @return Redirect
      * @throws NotFoundException
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -70,7 +72,8 @@ class MassDelete extends Action implements HttpPostActionInterface
                 __('A total of %1 record(s) have been deleted.', $logoDeleted)
             );
         }
-        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('codingdaniel_logomanager/category/index');
+        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)
+            ->setPath('codingdaniel_logomanager/category/index');
     }
 
 }

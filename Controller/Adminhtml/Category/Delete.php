@@ -1,9 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Category;
 
 use CodingDaniel\LogoManager\Controller\Adminhtml\Category;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\Registry;
+use Psr\Log\LoggerInterface;
 
 class Delete extends Category
 {
@@ -11,27 +13,26 @@ class Delete extends Category
     /**
      * @var \CodingDaniel\LogoManager\Model\Category
      */
-    protected $_category;
+    protected \CodingDaniel\LogoManager\Model\Category $_category;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
-    protected $_logger;
+    protected LoggerInterface $_logger;
 
     /**
      * Delete constructor.
      * @param Context $context
-     * @param \Magento\Framework\Registry $registry
+     * @param Registry $registry
      * @param \CodingDaniel\LogoManager\Model\Category $category
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param LoggerInterface $logger
      */
     public function __construct(
         Context $context,
-        \Magento\Framework\Registry $registry,
+        Registry $registry,
         \CodingDaniel\LogoManager\Model\Category $category,
-        \Psr\Log\LoggerInterface $logger
-    )
-    {
+        LoggerInterface $logger
+    ) {
         $this->_category = $category;
         $this->_logger = $logger;
         parent::__construct($context, $registry, $category);

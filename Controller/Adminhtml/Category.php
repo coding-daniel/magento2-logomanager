@@ -1,39 +1,35 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\Registry;
 
 abstract class Category extends Action
 {
-    const ACTION_RESOURCE = 'CodingDaniel_LogoManager::logo_manager_categories';
+    public const ACTION_RESOURCE = 'CodingDaniel_LogoManager::logo_manager_categories';
 
     /**
-     * Core registry
-     *
-     * @var \Magento\Framework\Registry
+     * @var Registry|null
      */
-    protected $_registry = null;
+    protected ?Registry $_registry = null;
 
     /**
      * @var \CodingDaniel\LogoManager\Model\Category
      */
-    protected $_category;
+    protected \CodingDaniel\LogoManager\Model\Category $_category;
 
     /**
-     * LogoManager constructor.
-     *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \CodingDaniel\LogoManager\Model\Category
+     * @param Context $context
+     * @param Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Category $category
      */
     public function __construct(
         Context $context,
-        \Magento\Framework\Registry $registry,
+        Registry $registry,
         \CodingDaniel\LogoManager\Model\Category $category
-    )
-    {
+    ) {
         $this->_category = $category;
         $this->_registry = $registry;
         parent::__construct($context);
@@ -44,7 +40,7 @@ abstract class Category extends Action
      *
      * @return bool
      */
-    protected function _isAllowed()
+    protected function _isAllowed(): bool
     {
         return $this->_authorization->isAllowed(self::ACTION_RESOURCE);
     }
@@ -55,7 +51,7 @@ abstract class Category extends Action
      * @param string $idFieldName
      * @return \CodingDaniel\LogoManager\Model\Category $model
      */
-    protected function _initCategory($idFieldName = 'category_id')
+    protected function _initCategory(string $idFieldName = 'category_id'): \CodingDaniel\LogoManager\Model\Category
     {
         $categoryId = (int)$this->getRequest()->getParam($idFieldName);
 

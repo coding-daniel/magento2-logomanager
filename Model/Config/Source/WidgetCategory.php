@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Model\Config\Source;
 
@@ -13,7 +13,7 @@ class WidgetCategory implements OptionSourceInterface
     /**
      * @var CollectionFactory
      */
-    private $category;
+    private CollectionFactory $category;
 
     /**
      * WidgetCategory constructor.
@@ -33,7 +33,7 @@ class WidgetCategory implements OptionSourceInterface
      * @param bool $withEmpty
      * @return array
      */
-    public function toOptionArray($simplified = false, $withEmpty = true)
+    public function toOptionArray(bool $simplified = false, bool $withEmpty = true): array
     {
         $types = $this->getTypes(false, $withEmpty);
         if ($simplified) {
@@ -47,12 +47,13 @@ class WidgetCategory implements OptionSourceInterface
     }
 
     /**
+     * Types
      *
      * @param bool $sorted
      * @param bool $withEmpty
      * @return array
      */
-    public function getTypes($sorted = true, $withEmpty = false)
+    public function getTypes(bool $sorted = true, bool $withEmpty = false): array
     {
         $collection = $this->category->create();
         $collection->addFieldToFilter('is_enabled', ['eq' => 1]);
@@ -68,8 +69,7 @@ class WidgetCategory implements OptionSourceInterface
         }
 
         if ($withEmpty) {
-            $result = ['0' => __('-- None --')] + $result;
-            return $result;
+            return ['0' => __('-- None --')] + $result;
         }
 
         return $result;

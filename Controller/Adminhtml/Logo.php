@@ -1,39 +1,35 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\Registry;
 
 abstract class Logo extends Action
 {
-    const ACTION_RESOURCE = 'CodingDaniel_LogoManager::logo_manager';
+    public const ACTION_RESOURCE = 'CodingDaniel_LogoManager::logo_manager';
 
     /**
-     * Core registry
-     *
-     * @var \Magento\Framework\Registry
+     * @var Registry|null
      */
-    protected $_registry = null;
+    protected ?Registry $_registry = null;
 
     /**
      * @var \CodingDaniel\LogoManager\Model\Logo
      */
-    protected $_logo;
+    protected \CodingDaniel\LogoManager\Model\Logo $_logo;
 
     /**
-     * LogoManager constructor.
-     *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \CodingDaniel\LogoManager\Model\Logo
+     * @param Context $context
+     * @param Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Logo $logo
      */
     public function __construct(
         Context $context,
-        \Magento\Framework\Registry $registry,
+        Registry $registry,
         \CodingDaniel\LogoManager\Model\Logo $logo
-    )
-    {
+    ) {
         $this->_registry = $registry;
         $this->_logo = $logo;
         parent::__construct($context);
@@ -44,7 +40,7 @@ abstract class Logo extends Action
      *
      * @return bool
      */
-    protected function _isAllowed()
+    protected function _isAllowed(): bool
     {
         return $this->_authorization->isAllowed(self::ACTION_RESOURCE);
     }
@@ -55,7 +51,7 @@ abstract class Logo extends Action
      * @param string $idFieldName
      * @return \CodingDaniel\LogoManager\Model\Logo $model
      */
-    protected function _initLogo($idFieldName = 'entity_id')
+    protected function _initLogo(string $idFieldName = 'entity_id'): \CodingDaniel\LogoManager\Model\Logo
     {
         $logoId = (int)$this->getRequest()->getParam($idFieldName);
 
@@ -78,6 +74,6 @@ abstract class Logo extends Action
     protected function isLogoExist(\CodingDaniel\LogoManager\Model\Logo $model)
     {
         $logoId = $this->getRequest()->getParam('entity_id');
-        return (!$model->getId() && $logoId) ? false : true;
+        return !((!$model->getId() && $logoId));
     }
 }

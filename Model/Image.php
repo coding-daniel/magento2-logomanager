@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Model;
 
@@ -18,59 +18,59 @@ use Psr\Log\LoggerInterface;
 class Image
 {
 
-    const IMAGE_TMP_PATH = 'logomanager/tmp/image';
+    public const IMAGE_TMP_PATH = 'logomanager/tmp/image';
 
-    const IMAGE_PATH = 'logomanager/image';
+    public const IMAGE_PATH = 'logomanager/image';
 
     /**
-     * Core file storage database
+     * File storage database
      *
      * @var Database
      */
-    protected $coreFileStorageDatabase;
+    protected Database $coreFileStorageDatabase;
 
     /**
      * Media directory object (writable).
      *
      * @var WriteInterface
      */
-    protected $mediaDirectory;
+    protected WriteInterface $mediaDirectory;
 
     /**
-     * Uploader factory
+     * Uploader
      *
      * @var UploaderFactory
      */
-    protected $uploaderFactory;
+    protected UploaderFactory $uploaderFactory;
 
     /**
-     * Store manager
+     * Store manager interface
      *
      * @var StoreManagerInterface
      */
-    protected $storeManager;
+    protected StoreManagerInterface $storeManager;
 
     /**
      * @var LoggerInterface
      */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     /**
-     * Base tmp path
+     * Tmp path
      *
      * @var string
      */
-    protected $baseTmpPath;
+    protected string $baseTmpPath;
 
     /**
-     * Base path
+     * Base path variable
      *
      * @var string
      */
-    protected $basePath;
+    protected string $basePath;
 
     /**
-     * Allowed extensions
+     * Allowed extensions variable
      *
      * @var string
      */
@@ -81,7 +81,7 @@ class Image
      *
      * @var string[]
      */
-    protected $allowedMimeTypes;
+    protected array $allowedMimeTypes;
 
     /**
      * ImageUploader constructor
@@ -98,15 +98,15 @@ class Image
      * @throws FileSystemException
      */
     public function __construct(
-        Database $coreFileStorageDatabase,
-        Filesystem $filesystem,
-        UploaderFactory $uploaderFactory,
+        Database              $coreFileStorageDatabase,
+        Filesystem            $filesystem,
+        UploaderFactory       $uploaderFactory,
         StoreManagerInterface $storeManager,
-        LoggerInterface $logger,
-        $baseTmpPath = self::IMAGE_TMP_PATH,
-        $basePath = self::IMAGE_PATH,
-        $allowedExtensions = [],
-        $allowedMimeTypes = []
+        LoggerInterface       $logger,
+        string $baseTmpPath = self::IMAGE_TMP_PATH,
+        string $basePath = self::IMAGE_PATH,
+        array $allowedExtensions = [],
+        array $allowedMimeTypes = []
     ) {
         $this->coreFileStorageDatabase = $coreFileStorageDatabase;
         $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
@@ -126,7 +126,7 @@ class Image
      *
      * @return void
      */
-    public function setBaseTmpPath($baseTmpPath)
+    public function setBaseTmpPath(string $baseTmpPath)
     {
         $this->baseTmpPath = $baseTmpPath;
     }
@@ -138,7 +138,7 @@ class Image
      *
      * @return void
      */
-    public function setBasePath($basePath)
+    public function setBasePath(string $basePath)
     {
         $this->basePath = $basePath;
     }
@@ -150,7 +150,7 @@ class Image
      *
      * @return void
      */
-    public function setAllowedExtensions($allowedExtensions)
+    public function setAllowedExtensions(array $allowedExtensions)
     {
         $this->allowedExtensions = $allowedExtensions;
     }
@@ -160,7 +160,7 @@ class Image
      *
      * @return string
      */
-    public function getBaseTmpPath()
+    public function getBaseTmpPath(): string
     {
         return $this->baseTmpPath;
     }
@@ -170,7 +170,7 @@ class Image
      *
      * @return string
      */
-    public function getBasePath()
+    public function getBasePath(): string
     {
         return $this->basePath;
     }
@@ -193,7 +193,7 @@ class Image
      *
      * @return string
      */
-    public function getFilePath($path, $imageName)
+    public function getFilePath(string $path, string $imageName): string
     {
         return rtrim($path, '/') . '/' . ltrim($imageName, '/');
     }
@@ -207,7 +207,7 @@ class Image
      *
      * @throws LocalizedException
      */
-    public function moveFileFromTmp($imageName)
+    public function moveFileFromTmp(string $imageName): string
     {
         $baseTmpPath = $this->getBaseTmpPath();
         $basePath = $this->getBasePath();
@@ -248,12 +248,12 @@ class Image
      * @return string[]
      *
      * @throws LocalizedException
+     * @throws Exception
      */
-    public function saveFileToTmpDir($fileId)
+    public function saveFileToTmpDir(string $fileId): array
     {
         $baseTmpPath = $this->getBaseTmpPath();
 
-        /** @var \Magento\MediaStorage\Model\File\Uploader $uploader */
         $uploader = $this->uploaderFactory->create(['fileId' => $fileId]);
         $uploader->setAllowedExtensions($this->getAllowedExtensions());
         $uploader->setAllowRenameFiles(true);
@@ -294,5 +294,4 @@ class Image
 
         return $result;
     }
-
 }

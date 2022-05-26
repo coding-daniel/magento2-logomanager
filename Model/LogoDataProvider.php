@@ -1,26 +1,31 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Model;
 
 use CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 
-class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
+class LogoDataProvider extends AbstractDataProvider
 {
 
     /**
      * @var array
      */
-    protected $loadedData;
+    protected array $loadedData;
 
     /**
-     * Store manager
+     * Store manager interface
      *
      * @var StoreManagerInterface
      */
-    protected $storeManager;
+    protected StoreManagerInterface $storeManager;
 
-    protected $_mediaUrl;
+    /**
+     * @var string
+     */
+    protected string $_mediaUrl;
 
     /**
      * LogoDataProvider constructor.
@@ -31,7 +36,7 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @param StoreManagerInterface $storeManager
      * @param array $meta
      * @param array $data
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function __construct(
         $name,
@@ -44,14 +49,18 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     ) {
         $this->collection = $logoCollectionFactory->create();
         $this->storeManager = $storeManager;
-        $this->_mediaUrl = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);;
+        $this->_mediaUrl = $this->storeManager->getStore()->getBaseUrl(
+            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+        );
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
     /**
+     * Data
+     *
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         if (isset($this->loadedData)) {
             return $this->loadedData;
@@ -86,8 +95,6 @@ class LogoDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
         }
 
-
         return $this->loadedData;
-
     }
 }

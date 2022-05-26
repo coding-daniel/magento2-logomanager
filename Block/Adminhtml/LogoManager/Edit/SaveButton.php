@@ -1,15 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Block\Adminhtml\LogoManager\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
-/**
- * Class SaveButton
- */
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {
     /**
+     * Button data
+     *
      * @return array
      */
     public function getButtonData()

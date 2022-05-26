@@ -1,16 +1,17 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Model;
 
 use CodingDaniel\LogoManager\Model\ResourceModel\Category\CollectionFactory;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 
-class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
+class CategoryDataProvider extends AbstractDataProvider
 {
 
     /**
      * @var array
      */
-    protected $loadedData;
+    protected array $loadedData;
 
     /**
      * CategoryDataProvider constructor.
@@ -34,9 +35,11 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     }
 
     /**
+     * Data
+     *
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         if (isset($this->loadedData)) {
             return $this->loadedData;
@@ -50,8 +53,6 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $this->loadedData[$item->getId()] = $item->getData();
         }
 
-
         return $this->loadedData;
-
     }
 }

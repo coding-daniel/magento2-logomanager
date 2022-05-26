@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace CodingDaniel\LogoManager\Block\Widget;
 
 use Magento\Framework\View\Element\Template;

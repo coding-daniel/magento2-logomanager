@@ -1,8 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Category;
 
 use CodingDaniel\LogoManager\Controller\Adminhtml\Category;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\Session;
+use Magento\Backend\Model\View\Result\Redirect;
+use Magento\Framework\Registry;
 
 class Save extends Category
 {
@@ -10,7 +14,7 @@ class Save extends Category
     /**
      * @var \CodingDaniel\LogoManager\Model\Category
      */
-    protected $_category;
+    protected \CodingDaniel\LogoManager\Model\Category $_category;
 
     /**
      * @var \CodingDaniel\LogoManager\Model\Category
@@ -18,29 +22,31 @@ class Save extends Category
     protected $_session;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $registry
+     * @param Context $context
+     * @param Registry $registry
      * @param \CodingDaniel\LogoManager\Model\Category $category
-     * @param \Magento\Backend\Model\Session $session
+     * @param Session $session
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $registry,
+        Context $context,
+        Registry $registry,
         \CodingDaniel\LogoManager\Model\Category $category,
-        \Magento\Backend\Model\Session $session
+        Session $session
     ) {
         $this->_session = $session;
         parent::__construct($context, $registry, $category);
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * Execute method
+     *
+     * @return Redirect
      */
-    public function execute()
+    public function execute(): Redirect
     {
 
         $data = $this->getRequest()->getPostValue();
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
 
@@ -56,19 +62,23 @@ class Save extends Category
                 $this->messageManager->addSuccess(__('You saved this category.'));
                 $this->_session->setFormData(false);
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['category_id' => $this->_category->getId(), '_current' => true]);
+                    return $resultRedirect->setPath(
+                        '*/*/edit',
+                        ['category_id' => $this->_category->getId(), '_current' => true]
+                    );
                 }
                 return $resultRedirect->setPath('*/*/');
-            } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addError($e->getMessage());
-            } catch (\RuntimeException $e) {
+            } catch (\Magento\Framework\Exception\LocalizedException|\RuntimeException $e) {
                 $this->messageManager->addError($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addException($e, __('Something went wrong while saving the category.'));
             }
 
             $this->_getSession()->setFormData($data);
-            return $resultRedirect->setPath('*/*/edit', ['category_id' => $this->getRequest()->getParam('category_id')]);
+            return $resultRedirect->setPath(
+                '*/*/edit',
+                ['category_id' => $this->getRequest()->getParam('category_id')]
+            );
         }
         return $resultRedirect->setPath('*/*/');
     }

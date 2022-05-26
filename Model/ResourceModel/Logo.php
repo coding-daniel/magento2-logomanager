@@ -1,21 +1,18 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Model\ResourceModel;
 
-class Logo extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
+class Logo extends AbstractDb
+{
     /**
-     * Logo constructor.
-     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     * Class construct
+     *
+     * @return void
      */
-    public function __construct(
-        \Magento\Framework\Model\ResourceModel\Db\Context $context
-    ) {
-        parent::__construct($context);
-    }
-
-    protected function _construct() {
+    protected function _construct()
+    {
         $this->_init('codingdaniel_logomanager_logos', 'entity_id');
     }
-
 }

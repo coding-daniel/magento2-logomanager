@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
@@ -17,7 +17,7 @@ class Edit extends Logo
         $model = $this->_initLogo();
 
         if (!$model->getId() && $logoId) {
-            $this->messageManager->addError(__('This logo no longer exists.'));
+            $this->messageManager->addErrorMessage(__('This logo no longer exists.'));
             $this->_redirect('codingdaniel_logomanager/logo/');
             return;
         }

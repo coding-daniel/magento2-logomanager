@@ -1,36 +1,37 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
 use CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Registry;
+use Psr\Log\LoggerInterface;
 
 class Delete extends Logo
 {
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
-    protected $_logger;
+    protected LoggerInterface $_logger;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \CodingDaniel\LogoManager\Model\Logo
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param Context $context
+     * @param Registry $registry
+     * @param \CodingDaniel\LogoManager\Model\Logo $logo
+     * @param LoggerInterface $logger
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $registry,
+        Context $context,
+        Registry $registry,
         \CodingDaniel\LogoManager\Model\Logo $logo,
-        \Psr\Log\LoggerInterface $logger
-    )
-    {
+        LoggerInterface $logger
+    ) {
         $this->_registry = $registry;
         $this->_logo = $logo;
         $this->_logger = $logger;
         parent::__construct($context, $registry, $logo);
     }
-
 
     /**
      * Delete action
@@ -46,14 +47,14 @@ class Delete extends Logo
                 $this->_logo->load($logoId);
                 $this->_logo->delete();
                 // display success message
-                $this->messageManager->addSuccess(__('You deleted the logo.'));
+                $this->messageManager->addSuccessMessage(__('You deleted the logo.'));
                 // go to grid
                 $this->_redirect('codingdaniel_logomanager/logo/');
                 return;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addError($e->getMessage());
+                $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addError(
+                $this->messageManager->addErrorMessage(
                     __(
                         'Something went wrong while deleting the logo data. '
                         . 'Please review the action log and try again.'
@@ -68,7 +69,7 @@ class Delete extends Logo
             }
         }
         // display error message
-        $this->messageManager->addError(__('We cannot find a logo to delete.'));
+        $this->messageManager->addErrorMessage(__('We cannot find a logo to delete.'));
         // go to grid
         $this->_redirect('codingdaniel_logomanager/logo/');
     }

@@ -1,40 +1,45 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
 use CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 use CodingDaniel\LogoManager\Model\Image;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\Session;
+use Magento\Backend\Model\View\Result\Redirect;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Registry;
 
 class Save extends Logo
 {
     /**
      * @var Image
      */
-    protected $imageUploader;
+    protected Image $imageUploader;
 
     /**
      * @var \CodingDaniel\LogoManager\Model\Logo
      */
-    protected $_logo;
+    protected \CodingDaniel\LogoManager\Model\Logo $_logo;
 
     /**
-     * @var \Magento\Backend\Model\Session
+     * @var Session
      */
     protected $_session;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \CodingDaniel\LogoManager\Model\Image
-     * @param \Magento\Framework\Registry $registry
+     * @param Context $context
+     * @param Image $image
+     * @param Registry $registry
      * @param \CodingDaniel\LogoManager\Model\Logo $logo
-     * @param \Magento\Backend\Model\Session $session
+     * @param Session $session
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
+        Context $context,
         Image $image,
-        \Magento\Framework\Registry $registry,
+        Registry $registry,
         \CodingDaniel\LogoManager\Model\Logo $logo,
-        \Magento\Backend\Model\Session $session
+        Session $session
     ) {
         $this->imageUploader = $image;
         $this->_logo = $logo;
@@ -43,27 +48,27 @@ class Save extends Logo
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * Execute method
+     *
+     * @return Redirect
+     * @throws LocalizedException
      */
-    public function execute()
+    public function execute(): Redirect
     {
 
         $data = $this->getRequest()->getPostValue();
 
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
 
         if ($data) {
 
-            if (
-                isset($data['desktop_logo_image'][0]['name']) &&
+            if (isset($data['desktop_logo_image'][0]['name']) &&
                 isset($data['desktop_logo_image'][0]['tmp_name'])
             ) {
                 $data['desktop_logo_image'] = $data['desktop_logo_image'][0]['name'];
                 $this->imageUploader->moveFileFromTmp($data['desktop_logo_image']);
-            } elseif (
-                isset($data['desktop_logo_image'][0]['name']) &&
+            } elseif (isset($data['desktop_logo_image'][0]['name']) &&
                 !isset($data['desktop_logo_image'][0]['tmp_name'])
             ) {
                 $data['desktop_logo_image'] = $data['desktop_logo_image'][0]['name'];
@@ -71,14 +76,12 @@ class Save extends Logo
                 $data['desktop_logo_image'] = '';
             }
 
-            if (
-                isset($data['mobile_logo_image'][0]['name']) &&
+            if (isset($data['mobile_logo_image'][0]['name']) &&
                 isset($data['mobile_logo_image'][0]['tmp_name'])
             ) {
                 $data['mobile_logo_image'] = $data['mobile_logo_image'][0]['name'];
                 $this->imageUploader->moveFileFromTmp($data['mobile_logo_image']);
-            } elseif (
-                isset($data['mobile_logo_image'][0]['name']) &&
+            } elseif (isset($data['mobile_logo_image'][0]['name']) &&
                 !isset($data['mobile_logo_image'][0]['tmp_name'])
             ) {
                 $data['mobile_logo_image'] = $data['mobile_logo_image'][0]['name'];
@@ -95,18 +98,19 @@ class Save extends Logo
 
             try {
                 $this->_logo->save();
-                $this->messageManager->addSuccess(__('You saved this Logo.'));
+                $this->messageManager->addSuccessMessage(__('You saved this Logo.'));
                 $this->_session->setFormData(false);
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['entity_id' => $this->_logo->getId(), '_current' => true]);
+                    return $resultRedirect->setPath(
+                        '*/*/edit',
+                        ['entity_id' => $this->_logo->getId(), '_current' => true]
+                    );
                 }
                 return $resultRedirect->setPath('*/*/');
-            } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addError($e->getMessage());
-            } catch (\RuntimeException $e) {
-                $this->messageManager->addError($e->getMessage());
+            } catch (LocalizedException|\RuntimeException $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addException($e, __('Something went wrong while saving the logo.'));
+                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the logo.'));
             }
 
             $this->_getSession()->setFormData($data);

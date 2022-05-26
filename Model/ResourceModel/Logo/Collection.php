@@ -1,16 +1,27 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace CodingDaniel\LogoManager\Model\ResourceModel\Logo;
 
-class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection {
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+
+class Collection extends AbstractCollection
+{
 
     /**
      * @var string
      */
     protected $_idFieldName = 'entity_id';
 
-
-    protected function _construct() {
-        $this->_init('CodingDaniel\LogoManager\Model\Logo', 'CodingDaniel\LogoManager\Model\ResourceModel\Logo');
+    /**
+     * Class construct
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        $this->_init(
+            CodingDaniel\LogoManager\Model\Logo::class,
+            CodingDaniel\LogoManager\Model\ResourceModel\Logo::class
+        );
     }
-
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
@@ -10,6 +10,7 @@ use CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Ui\Component\MassAction\Filter;
 
@@ -18,25 +19,25 @@ class MassDelete extends Action implements HttpPostActionInterface
     /**
      * Authorization level
      */
-    const ADMIN_RESOURCE = 'CodingDaniel_LogoManager::logo_manager';
+    public const ADMIN_RESOURCE = 'CodingDaniel_LogoManager::logo_manager';
 
     /**
-     * @var \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory
+     * @var CollectionFactory
      */
-    protected $collectionFactory;
+    protected CollectionFactory $collectionFactory;
 
 
     /**
-     * @var \Magento\Ui\Component\MassAction\Filter
+     * @var Filter
      */
-    protected $filter;
+    protected Filter $filter;
 
     /**
      * Constructor
      *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Ui\Component\MassAction\Filter $filter
-     * @param \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory $collectionFactory
+     * @param Context $context
+     * @param Filter $filter
+     * @param CollectionFactory $collectionFactory
      */
     public function __construct(
         Context $context,
@@ -49,9 +50,11 @@ class MassDelete extends Action implements HttpPostActionInterface
     }
 
     /**
+     * Execute method
+     *
      * @return Redirect
      * @throws NotFoundException
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function execute(): Redirect
     {
@@ -70,7 +73,7 @@ class MassDelete extends Action implements HttpPostActionInterface
                 __('A total of %1 record(s) have been deleted.', $logoDeleted)
             );
         }
-        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('codingdaniel_logomanager/logo/index');
+        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)
+            ->setPath('codingdaniel_logomanager/logo/index');
     }
-
 }

@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Block\Adminhtml\LogoManager\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
-/**
- * Class for "Delete" button on the create/edit logo form
- */
 class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
 

@@ -1,42 +1,44 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Controller\Adminhtml\Logo;
 
 use CodingDaniel\LogoManager\Model\Image;
+use CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Ui\Component\MassAction\Filter;
 
 class ImageUpload extends Action implements HttpPostActionInterface
 {
     /**
      * Authorization level
      */
-    const ADMIN_RESOURCE = 'CodingDaniel_LogoManager::logo_manager';
+    public const ADMIN_RESOURCE = 'CodingDaniel_LogoManager::logo_manager';
 
     /**
-     * Image uploader
-     *
-     * @var \CodingDaniel\LogoManager\Model\Image $imageUploader
+     * @var Image $imageUploader
      */
-    protected $imageUploader;
+    protected Image $imageUploader;
 
     /**
-     * @var \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory
+     * @var CollectionFactory
      */
-    protected $collectionFactory;
+    protected CollectionFactory $collectionFactory;
 
     /**
-     * @var \Magento\Ui\Component\MassAction\Filter
+     * @var Filter
      */
-    protected $filter;
+    protected Filter $filter;
 
     /**
      * Constructor
      *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \CodingDaniel\LogoManager\Model\Image $image
+     * @param Context $context
+     * @param Image $image
      */
     public function __construct(
         Context $context,
@@ -47,7 +49,9 @@ class ImageUpload extends Action implements HttpPostActionInterface
     }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * Execute method
+     *
+     * @return ResponseInterface|ResultInterface
      */
     public function execute()
     {
@@ -60,5 +64,4 @@ class ImageUpload extends Action implements HttpPostActionInterface
         }
         return $this->resultFactory->create(ResultFactory::TYPE_JSON)->setData($result);
     }
-
 }

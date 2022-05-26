@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Console\Command;
 
@@ -20,32 +20,32 @@ class LogoManagerExport extends Command
     /**
      * @var Csv
      */
-    private $csv;
+    private Csv $csv;
 
     /**
      * @var Logo
      */
-    private $logo;
+    private Logo $logo;
 
     /**
      * @var Category
      */
-    private $category;
+    private Category $category;
 
     /**
      * @var DirectoryList
      */
-    private $directoryList;
+    private DirectoryList $directoryList;
 
     /**
      * @var State
      */
-    private $state;
+    private State $state;
 
     /**
-     * @var \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
+     * @var CollectionFactory;
      */
-    private $collectionFactory;
+    private CollectionFactory $collectionFactory;
 
     /**
      * @var
@@ -90,6 +90,8 @@ class LogoManagerExport extends Command
     }
 
     /**
+     * Execute method
+     *
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int|void
@@ -108,10 +110,11 @@ class LogoManagerExport extends Command
             $output->writeln('<comment>An exception was thrown :</comment>');
             $output->writeln($e->getMessage());
         }
-
     }
 
     /**
+     * Export method
+     *
      * @throws \Magento\Framework\Exception\FileSystemException
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -150,6 +153,8 @@ class LogoManagerExport extends Command
     }
 
     /**
+     * Collection
+     *
      * @return \CodingDaniel\LogoManager\Model\ResourceModel\Logo\Collection
      */
     private function getCollection()
@@ -159,11 +164,13 @@ class LogoManagerExport extends Command
     }
 
     /**
+     * Return csv headers
+     *
      * @return array
      */
-    private function getHeaders()
+    private function getHeaders(): array
     {
-        $data = [
+        return [
             'Id',
             'Title',
             'Description',
@@ -174,6 +181,5 @@ class LogoManagerExport extends Command
             'Enabled',
             'Created'
         ];
-        return $data;
     }
 }

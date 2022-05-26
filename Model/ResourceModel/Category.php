@@ -1,30 +1,31 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Model\ResourceModel;
 
-class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+
+class Category extends AbstractDb
+{
 
     /**
-     * Category constructor.
-     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     * Class construct
+     *
+     * @return void
      */
-    public function __construct(
-        \Magento\Framework\Model\ResourceModel\Db\Context $context
-    ) {
-        parent::__construct($context);
-    }
-
-    protected function _construct() {
+    protected function _construct()
+    {
         $this->_init('codingdaniel_logomanager_categories', 'category_id');
     }
 
     /**
      * Retrieves Category Name from DB by id.
-     * @param $id
+     *
+     * @param string $id
      * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
-    public function getCategoryNameById($id)
+    public function getCategoryNameById(string $id): string
     {
         $adapter = $this->getConnection();
         $select = $adapter->select()
@@ -34,5 +35,4 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
 
         return $adapter->fetchOne($select, $binds);
     }
-
 }

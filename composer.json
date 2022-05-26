@@ -2,14 +2,15 @@
     "name": "codingdaniel/magento2-logomanager",
     "description": "Logo manager for Magento 2",
     "require": {
-        "php": ">=7.3.0",
-        "magento/framework": ">=102.0.5"
+        "php": ">=7.4.0",
+        "magento/magento-composer-installer": "*",
+        "codingdaniel/magento2-core": "*"
     },
     "keywords": [
         "magento",
         "github"
     ],
-    "homepage": "https://github.com/coding-daniel/magento-logomanager",
+    "homepage": "https://github.com/coding-daniel/magento2-logomanager",
     "readme": "README.md",
     "authors": [
         {

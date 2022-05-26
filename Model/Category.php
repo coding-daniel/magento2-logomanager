@@ -1,20 +1,32 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace CodingDaniel\LogoManager\Model;
 
-class Category extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface {
+use Magento\Framework\DataObject\IdentityInterface;
+use Magento\Framework\Model\AbstractModel;
 
-    const CACHE_TAG = 'codingdaniel_logomanager_categories';
+class Category extends AbstractModel implements IdentityInterface
+{
 
-    protected function _construct() {
-        $this->_init('CodingDaniel\LogoManager\Model\ResourceModel\Category');
+    public const CACHE_TAG = 'codingdaniel_logomanager_categories';
+
+    /**
+     * Class construct
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        $this->_init(CodingDaniel\LogoManager\Model\ResourceModel\Category::class);
     }
 
     /**
+     * Identities
+     *
      * @return array|string[]
      */
-    public function getIdentities() {
+    public function getIdentities(): array
+    {
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
-
 }
