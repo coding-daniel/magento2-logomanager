@@ -6,6 +6,7 @@ use CodingDaniel\LogoManager\Controller\Adminhtml\Category;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\Session;
 use Magento\Backend\Model\View\Result\Redirect;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
 
 class Save extends Category
@@ -68,7 +69,7 @@ class Save extends Category
                     );
                 }
                 return $resultRedirect->setPath('*/*/');
-            } catch (\Magento\Framework\Exception\LocalizedException|\RuntimeException $e) {
+            } catch (LocalizedException|\RuntimeException $e) {
                 $this->messageManager->addError($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addException($e, __('Something went wrong while saving the category.'));

@@ -2,6 +2,8 @@
 
 namespace CodingDaniel\LogoManager\Model\ResourceModel\Logo;
 
+use CodingDaniel\LogoManager\Model\ResourceModel\Logo;
+use CodingDaniel\LogoManager\Model\Logo as ModelLogo;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection
@@ -20,8 +22,8 @@ class Collection extends AbstractCollection
     protected function _construct()
     {
         $this->_init(
-            CodingDaniel\LogoManager\Model\Logo::class,
-            CodingDaniel\LogoManager\Model\ResourceModel\Logo::class
+            ModelLogo::class,
+            Logo::class
         );
     }
 }

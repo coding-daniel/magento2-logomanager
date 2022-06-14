@@ -17,7 +17,7 @@ class Edit extends Category
         $model = $this->_initCategory();
 
         if (!$model->getId() && $logoId) {
-            $this->messageManager->addError(__('This category no longer exists.'));
+            $this->messageManager->addErrorMessage(__('This category no longer exists.'));
             $this->_redirect('codingdaniel_logomanager/category/');
             return;
         }

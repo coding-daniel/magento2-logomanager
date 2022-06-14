@@ -25,7 +25,6 @@ class MassDelete extends Action implements HttpPostActionInterface
      */
     protected CollectionFactory $collectionFactory;
 
-
     /**
      * @var Filter
      */
@@ -75,5 +74,4 @@ class MassDelete extends Action implements HttpPostActionInterface
         return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)
             ->setPath('codingdaniel_logomanager/category/index');
     }
-
 }

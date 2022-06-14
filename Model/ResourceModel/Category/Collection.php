@@ -2,6 +2,8 @@
 
 namespace CodingDaniel\LogoManager\Model\ResourceModel\Category;
 
+use CodingDaniel\LogoManager\Model\ResourceModel\Category;
+use CodingDaniel\LogoManager\Model\Category as ModelCategory;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection
@@ -20,8 +22,8 @@ class Collection extends AbstractCollection
     protected function _construct()
     {
         $this->_init(
-            CodingDaniel\LogoManager\Model\Category::class,
-            CodingDaniel\LogoManager\Model\ResourceModel\Category::class
+            ModelCategory::class,
+            Category::class
         );
     }
 }

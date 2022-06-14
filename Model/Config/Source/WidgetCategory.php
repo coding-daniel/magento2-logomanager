@@ -5,9 +5,6 @@ namespace CodingDaniel\LogoManager\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 use CodingDaniel\LogoManager\Model\ResourceModel\Category\CollectionFactory;
 
-/**
- * Class WidgetCategory
- */
 class WidgetCategory implements OptionSourceInterface
 {
     /**
@@ -74,5 +71,4 @@ class WidgetCategory implements OptionSourceInterface
 
         return $result;
     }
-
 }

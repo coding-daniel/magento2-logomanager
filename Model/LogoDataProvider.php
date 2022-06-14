@@ -4,6 +4,7 @@ namespace CodingDaniel\LogoManager\Model;
 
 use CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 
@@ -50,7 +51,7 @@ class LogoDataProvider extends AbstractDataProvider
         $this->collection = $logoCollectionFactory->create();
         $this->storeManager = $storeManager;
         $this->_mediaUrl = $this->storeManager->getStore()->getBaseUrl(
-            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+            UrlInterface::URL_TYPE_MEDIA
         );
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }

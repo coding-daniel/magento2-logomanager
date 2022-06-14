@@ -52,14 +52,14 @@ class Delete extends Category
                 $this->_category->load($logoId);
                 $this->_category->delete();
                 // display success message
-                $this->messageManager->addSuccess(__('You deleted the category.'));
+                $this->messageManager->addSuccessMessage(__('You deleted the category.'));
                 // go to grid
                 $this->_redirect('codingdaniel_logomanager/category/');
                 return;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addError($e->getMessage());
+                $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addError(
+                $this->messageManager->addErrorMessage(
                     __(
                         'Something went wrong while deleting the category data. '
                         . 'Please review the action log and try again.'
@@ -74,7 +74,7 @@ class Delete extends Category
             }
         }
         // display error message
-        $this->messageManager->addError(__('We cannot find a category to delete.'));
+        $this->messageManager->addErrorMessage(__('We cannot find a category to delete.'));
         // go to grid
         $this->_redirect('codingdaniel_logomanager/category/');
     }

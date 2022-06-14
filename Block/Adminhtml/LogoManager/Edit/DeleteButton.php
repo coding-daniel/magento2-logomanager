@@ -8,18 +8,20 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
 
     /**
+     * Get Data
+     *
      * @return array
      */
-    public function getButtonData()
+    public function getButtonData(): array
     {
         $data = [];
         if ($this->getLogoId()) {
             $data = [
                 'label' => __('Delete'),
                 'class' => 'delete',
-                'on_click' => 'deleteConfirm(\'' . __(
-                        'Are you sure you want to do this?'
-                    ) . '\', \'' . $this->getDeleteUrl() . '\')',
+                'on_click' => 'deleteConfirm(\'' .
+                    __('Are you sure you want to do this?') .
+                    '\', \'' . $this->getDeleteUrl() . '\')',
                 'sort_order' => 20,
             ];
         }
@@ -27,9 +29,11 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
     }
 
     /**
+     * Delete URL
+     *
      * @return string
      */
-    public function getDeleteUrl()
+    public function getDeleteUrl(): string
     {
         return $this->getUrl('*/*/delete', ['entity_id' => $this->getLogoId()]);
     }

@@ -71,7 +71,7 @@ abstract class Logo extends Action
      * @param \CodingDaniel\LogoManager\Model\Logo $model
      * @return bool
      */
-    protected function isLogoExist(\CodingDaniel\LogoManager\Model\Logo $model)
+    protected function isLogoExist(\CodingDaniel\LogoManager\Model\Logo $model): bool
     {
         $logoId = $this->getRequest()->getParam('entity_id');
         return !((!$model->getId() && $logoId));

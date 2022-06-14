@@ -2,6 +2,9 @@
 
 namespace CodingDaniel\LogoManager\Console\Command;
 
+use CodingDaniel\LogoManager\Model\ResourceModel\Logo\Collection;
+use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Exception\LocalizedException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -94,7 +97,7 @@ class LogoManagerExport extends Command
      *
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return int|void
+     * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -115,8 +118,8 @@ class LogoManagerExport extends Command
     /**
      * Export method
      *
-     * @throws \Magento\Framework\Exception\FileSystemException
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws FileSystemException
+     * @throws LocalizedException
      */
     private function exportCsvFile()
     {
@@ -155,12 +158,11 @@ class LogoManagerExport extends Command
     /**
      * Collection
      *
-     * @return \CodingDaniel\LogoManager\Model\ResourceModel\Logo\Collection
+     * @return void
      */
-    private function getCollection()
+    private function getCollection(): void
     {
         $this->collection = $this->collectionFactory->create();
-        return $this->collection;
     }
 
     /**

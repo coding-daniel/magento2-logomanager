@@ -2,10 +2,18 @@
 
 namespace CodingDaniel\LogoManager\Block\Widget;
 
+use CodingDaniel\LogoManager\Model\ResourceModel\Logo\Collection;
+use CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Filesystem;
+use Magento\Framework\Image\AdapterFactory;
+use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Widget\Block\BlockInterface;
 
-class Logo extends Template implements BlockInterface {
+class Logo extends Template implements BlockInterface
+{
 
     /**
      * @var string
@@ -13,36 +21,35 @@ class Logo extends Template implements BlockInterface {
     protected $_template = "widget/logos.phtml";
 
     /**
-     * @var \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory
+     * @var CollectionFactory
      */
-    protected $_collection;
+    protected CollectionFactory $_collection;
 
     /**
-     * @var \Magento\Framework\Image\AdapterFactory
+     * @var AdapterFactory
      */
-    protected $_imageFactory;
+    protected AdapterFactory $_imageFactory;
 
     /**
-     * @var \Magento\Framework\Filesystem
+     * @var Filesystem
      */
     protected $_filesystem;
 
     /**
      * Logo constructor.
      * @param Template\Context $context
-     * @param \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory $collectionFactory
-     * @param \Magento\Framework\Image\AdapterFactory $imageFactory
-     * @param \Magento\Framework\Filesystem $filesystem
+     * @param CollectionFactory $collectionFactory
+     * @param AdapterFactory $imageFactory
+     * @param Filesystem $filesystem
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
-        \CodingDaniel\LogoManager\Model\ResourceModel\Logo\CollectionFactory $collectionFactory,
-        \Magento\Framework\Image\AdapterFactory $imageFactory,
-        \Magento\Framework\Filesystem $filesystem,
+        CollectionFactory $collectionFactory,
+        AdapterFactory $imageFactory,
+        Filesystem $filesystem,
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($context, $data);
         $this->_collection = $collectionFactory;
         $this->_imageFactory = $imageFactory;
@@ -50,35 +57,45 @@ class Logo extends Template implements BlockInterface {
     }
 
     /**
-     * @param null $cat
-     * @return \CodingDaniel\LogoManager\Model\ResourceModel\Logo\Collection
+     * Get logos
+     *
+     * @param string|null $cat
+     * @return Collection
      */
-    public function getLogosCollection($cat = null) {
+    public function getLogosCollection(string $cat = null): Collection
+    {
         $collection = $this->_collection->create();
         $collection->addFieldToFilter('is_enabled', ['eq' => 1]);
-        if($cat) $collection->addFieldToFilter('category_select', ['eq' => $cat]);
+        if ($cat) {
+            $collection->addFieldToFilter('category_select', ['eq' => $cat]);
+        }
         return $collection;
     }
 
     /**
-     * @param $image
-     * @param null $width
-     * @param null $height
-     * @return bool|string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * Resize images
+     *
+     * @param string $image
+     * @param string|null $width
+     * @param string|null $height
+     * @return false|string
+     * @throws NoSuchEntityException
      */
-    public function resize($image, $width = null, $height = null) {
+    public function resize(string $image, string $width = null, string $height = null)
+    {
+        $absolutePath = $this->_filesystem
+                ->getDirectoryRead(DirectoryList::MEDIA)
+                ->getAbsolutePath('logomanager/image/') . $image;
+        if (!file_exists($absolutePath)) {
+            return false;
+        }
 
-        $absolutePath = $this->_filesystem->getDirectoryRead(
-            \Magento\Framework\App\Filesystem\DirectoryList::MEDIA
-            )->getAbsolutePath('logomanager/image/') . $image;
-        if (!file_exists($absolutePath)) return false;
+        $imageResized = $this->_filesystem
+                ->getDirectoryRead(DirectoryList::MEDIA)
+                ->getAbsolutePath('logomanager/resized/' . $width . '/') . $image;
 
-        $imageResized = $this->_filesystem->getDirectoryRead(
-            \Magento\Framework\App\Filesystem\DirectoryList::MEDIA
-            )->getAbsolutePath('logomanager/resized/'.$width.'/') . $image;
-
-        if (!file_exists($imageResized)) { // Only resize image if not already exists.
+        // Only resize image if not already exists.
+        if (!file_exists($imageResized)) {
             //create image factory...
             $imageResize = $this->_imageFactory->create();
             $imageResize->open($absolutePath);
@@ -86,18 +103,15 @@ class Logo extends Template implements BlockInterface {
             $imageResize->keepTransparency(true);
             $imageResize->keepFrame(false);
             $imageResize->keepAspectRatio(true);
-            $imageResize->resize($width,$height);
+            $imageResize->resize($width, $height);
             //destination folder
-            $destination = $imageResized ;
+            $destination = $imageResized;
             //save image
             $imageResize->save($destination);
         }
 
-        $resizedURL = $this->_storeManager->getStore()->getBaseUrl(
-            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-            ).'logomanager/resized/'.$width.'/' . $image;
-
-        return $resizedURL;
+        return $this->_storeManager->getStore()->getBaseUrl(
+            UrlInterface::URL_TYPE_MEDIA
+        ) . 'logomanager/resized/' . $width . '/' . $image;
     }
-
 }

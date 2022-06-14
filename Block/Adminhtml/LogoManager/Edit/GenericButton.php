@@ -15,22 +15,22 @@ class GenericButton
     /**
      * @var LogoFactory
      */
-    private $logoFactory;
+    private LogoFactory $logoFactory;
 
     /**
      * @var Logo
      */
-    private $logoResourceModel;
+    private Logo $logoResourceModel;
 
     /**
      * @var UrlInterface
      */
-    private $urlBuilder;
+    private UrlInterface $urlBuilder;
 
     /**
      * @var RequestInterface
      */
-    private $request;
+    private RequestInterface $request;
 
     /**
      * @param UrlInterface $urlBuilder
@@ -55,7 +55,7 @@ class GenericButton
      *
      * @return int|null
      */
-    public function getLogoId()
+    public function getLogoId(): ?int
     {
         $logo = $this->logoFactory->create();
 
@@ -70,11 +70,11 @@ class GenericButton
     /**
      * Generate url by route and parameters
      *
-     * @param   string $route
-     * @param   array $params
-     * @return  string
+     * @param string $route
+     * @param array $params
+     * @return string
      */
-    public function getUrl($route = '', $params = [])
+    public function getUrl(string $route = '', array $params = []): string
     {
         return $this->urlBuilder->getUrl($route, $params);
     }
