@@ -7,18 +7,7 @@ The brands are displayed in a carousel on the front-end
 It also offers a way to export them into a CSV file via a CLI command
 
 ### Composer
-Add to `composer.json` file:
-
-```
-"repositories": {
-    "codingdaniel": {
-        "type": "vcs",
-        "url": "https://github.com/coding-daniel/magento-logomanager"
-    }
-}
-
-```
-Then require with `composer require codingdaniel/magento2-logomanager`
+Add the module with `composer require codingdaniel/magento2-logomanager`
  
 ### Export
 CLI command to export the brands in to a CSV file

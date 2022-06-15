@@ -13,3 +13,7 @@
 1.0.3
 =============
 * Improved PHPDocs
+
+1.0.4
+=============
+* Fix module to follow [Magento Coding Standards](https://github.com/magento/magento-coding-standard)
