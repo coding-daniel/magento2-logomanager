@@ -6,6 +6,7 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   coding-standards:
+    working_directory: /app
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -40,6 +41,10 @@ jobs:
             $CIRCLE_WORKING_DIRECTORY/app/code/CodingDaniel/* --extensions=php,phtml
             --warning-severity=$SNIFFER_SEVERITY
             --ignore=".circleci/config.yml,*.xml"
+      - persist_to_workspace:
+          root: /
+          paths:
+            - app
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
