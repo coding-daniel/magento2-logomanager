@@ -12,7 +12,7 @@ jobs:
     docker:
       - image: cimg/php:7.4
     environment:
-      MODULE_PATH: ~/project/app/code/CodingDaniel/LogoManager
+      MODULE_PATH: app/code/CodingDaniel/LogoManager
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     description: Install PHPCS dependencies and run.
