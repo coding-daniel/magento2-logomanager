@@ -22,7 +22,7 @@ jobs:
           command: >-
             composer require --no-progress --prefer-dist --dev
             squizlabs/php_codesniffer:3.x-dev
-            magento/magento-coding-standard=$SNIFFER_VERSION
+            magento/magento-coding-standard
       - run:
           name: Set installed config paths.
           command: >-
