@@ -16,19 +16,31 @@ jobs:
     description: Install PHPCS dependencies and run.
     steps:
       - checkout:
-          path: ~/app/code/CodingDaniel
+          path: ~/project/app/code/CodingDaniel
 
       - run:
           name: Check PHP version.
           command: php -v
       - run:
-          name: List directories.
+          name: List directories 1.
           command: >-
-            pwd && ls -al
+            cd ~/project && pwd && ls -al
       - run:
-          name: List directories.
+          name: List directories 2.
           command: >-
-            cd .. && pwd && ls -al
+            cd ~/project/app && pwd && ls -al
+      - run:
+          name: List directories 3.
+          command: >-
+            cd ~/project/app/code && pwd && ls -al
+      - run:
+          name: List directories 4.
+          command: >-
+            cd ~/project/app/code/CodingDaniel && pwd && ls -al
+      - run:
+          name: List directories 5.
+          command: >-
+            cd ~/project/vendor && pwd && ls -al
       - run:
           name: Composer require PHPCS and Magento coding standard.
           command: >-
