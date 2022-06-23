@@ -15,8 +15,13 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     description: Install PHPCS dependencies and run.
     steps:
+      - run:
+          name: "Setup custom environment variables"
+          command: >-
+          echo 'export MODULE_PATH="~/project/app/code/CodingDaniel/LogoManager"' >> $BASH_ENV
+
       - checkout:
-          path: ~/project/app/code/CodingDaniel/LogoManager
+          path: $MODULE_PATH
 
       - run:
           name: Check PHP version.
@@ -48,7 +53,7 @@ jobs:
           name: Run PHPCS
           command: >-
             vendor/bin/phpcs --standard=Magento2,PSR1,PSR2
-            $CIRCLE_WORKING_DIRECTORY/app/code/CodingDaniel/*/** --extensions=php,phtml
+            $MODULE_PATH/* --extensions=php,phtml
             --warning-severity=$SNIFFER_SEVERITY
             --ignore=".circleci/config.yml,*.xml"
 
