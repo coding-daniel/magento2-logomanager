@@ -46,8 +46,8 @@ jobs:
 workflows:
   coding-standards-workflow:
     jobs:
-      - build
-        filters:
-          branches:
-            only:
-              - circleci-project-setup
+      - build:
+          filters:
+            branches:
+              only:
+                - circleci-project-setup
