@@ -6,7 +6,7 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
-    working_directory: ~/app
+    working_directory: ~/app/sub_folder
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -15,7 +15,8 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     description: Install PHPCS dependencies and run.
     steps:
-      - checkout
+      - checkout:
+          path: ~/app
 
       - run:
           name: Check PHP version.
@@ -27,9 +28,13 @@ jobs:
       - run:
           name: Composer require PHPCS and Magento coding standard.
           command: >-
-            composer require --no-progress --prefer-dist --dev
+            composer require --no-progress --prefer-dist --dev --working-dir ../
             squizlabs/php_codesniffer:3.x-dev
             magento/magento-coding-standard
+      - run:
+          name: List directories.
+          command: >-
+            pwd && ls -al
       - run:
           name: Set installed config paths.
           command: >-
