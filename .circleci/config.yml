@@ -34,8 +34,7 @@ jobs:
           command: >-
             pwd && ls -al
 
-      - checkout:
-        path: ~/app
+      - checkout
 
       - run:
           name: Run PHPCS
