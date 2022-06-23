@@ -50,8 +50,7 @@ jobs:
           name: Run PHPCS
           command: >-
             vendor/bin/phpcs --standard=Magento2
-            $MODULE_PATH/* --extensions=php,phtml
-            --warning-severity=$SNIFFER_SEVERITY
+            $MODULE_PATH --extensions=php,phtml
             --ignore=".circleci/config.yml,*.xml"
 
 # Invoke jobs via workflows
