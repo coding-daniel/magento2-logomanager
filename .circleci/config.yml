@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Run PHPCS
           command: >-
-            vendor/bin/phpcs --standard=Magento2,PSR1,PSR2
+            vendor/bin/phpcs --standard=Magento2
             $MODULE_PATH/* --extensions=php,phtml
             --warning-severity=$SNIFFER_SEVERITY
             --ignore=".circleci/config.yml,*.xml"
