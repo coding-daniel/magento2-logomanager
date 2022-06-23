@@ -34,10 +34,26 @@ jobs:
           command: >-
             cd ~/project/vendor && pwd && ls -al
       - run:
+          name: List phpcs directories.
+          command: >-
+            cd ~/project/vendor/bin && pwd && ls -al
+      - run:
+          name: List vendor directories.
+          command: >-
+            cd ~/project/vendor && pwd && ls -al
+      - run:
+          name: List magento directories.
+          command: >-
+            cd ~/project/vendor/magento && pwd && ls -al
+      - run:
+          name: List mcs directories.
+          command: >-
+            cd ~/project/vendor/magento/magento-coding-standard && pwd && ls -al
+      - run:
           name: Set installed config paths.
           command: >-
-            vendor/bin/phpcs --config-set installed_paths
-            ../../magento/magento-coding-standard/
+            ~/project/vendor/bin/phpcs --config-set installed_paths
+            ~/project/vendor/magento/magento-coding-standard/
       - run:
           name: List project directories.
           command: >-
