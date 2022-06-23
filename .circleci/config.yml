@@ -32,7 +32,10 @@ jobs:
       - run:
           name: List directories.
           command: >-
-            cd $CIRCLE_WORKING_DIRECTORY && ls -al
+            pwd && ls -al
+            
+      - checkout
+
       - run:
           name: Run PHPCS
           command: >-
