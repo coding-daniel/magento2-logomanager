@@ -45,7 +45,7 @@ jobs:
       - run:
           name: List module directories.
           command: >-
-            cd ~/project/{$MODULE_PATH} && pwd && ls -al
+            cd ~/project/$MODULE_PATH && pwd && ls -al
       - run:
           name: Run PHPCS
           command: >-
