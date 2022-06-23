@@ -16,10 +16,13 @@ jobs:
     description: Install PHPCS dependencies and run.
     steps:
       - checkout
-      
+
       - run:
           name: Check PHP version.
           command: php -v
+      - run:
+          name: Add Composer permissions
+          command: sudo chown -R $USER ~/.composer/
       - run:
           name: Composer require PHPCS and Magento coding standard.
           command: >-
