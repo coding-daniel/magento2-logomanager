@@ -21,7 +21,8 @@ jobs:
           name: Check PHP version.
           command: php -v
       - run:
-          name: List directories.
+          name: Add Composer permissions
+          command: >-
             pwd && ls -al
       - run:
           name: Composer require PHPCS and Magento coding standard.
