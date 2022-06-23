@@ -34,7 +34,7 @@ jobs:
           command: >-
             pwd && ls -al
 
-      - checkout
+      - checkout:
         path: ~/app
 
       - run:
