@@ -34,7 +34,7 @@ jobs:
       - run:
           name: List vendor directories.
           command: >-
-            cd {$PROJECT_PATH}/vendor && pwd && ls -al
+            cd $PROJECT_PATH/vendor && pwd && ls -al
       - run:
           name: Set installed config paths.
           command: >-
@@ -43,16 +43,16 @@ jobs:
       - run:
           name: List project directories.
           command: >-
-            cd {$PROJECT_PATH} && pwd && ls -al
+            cd $PROJECT_PATH && pwd && ls -al
       - run:
           name: List module directories.
           command: >-
-            cd {$PROJECT_PATH}/{$MODULE_PATH} && pwd && ls -al
+            cd $PROJECT_PATH/$MODULE_PATH && pwd && ls -al
       - run:
           name: Run PHPCS
           command: >-
             vendor/bin/phpcs --standard=Magento2,PSR1,PSR2
-            {$PROJECT_PATH}/{$MODULE_PATH}/* --extensions=php,phtml
+            $PROJECT_PATH/$MODULE_PATH/* --extensions=php,phtml
             --warning-severity=$SNIFFER_SEVERITY
             --ignore=".circleci/config.yml,*.xml"
 
