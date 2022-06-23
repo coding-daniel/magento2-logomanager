@@ -48,7 +48,7 @@ jobs:
           name: Run PHPCS
           command: >-
             vendor/bin/phpcs --standard=Magento2,PSR1,PSR2
-            $CIRCLE_WORKING_DIRECTORY/app/code/CodingDaniel/* --extensions=php,phtml
+            $CIRCLE_WORKING_DIRECTORY/app/code/CodingDaniel/*/** --extensions=php,phtml
             --warning-severity=$SNIFFER_SEVERITY
             --ignore=".circleci/config.yml,*.xml"
 
