@@ -16,31 +16,15 @@ jobs:
     description: Install PHPCS dependencies and run.
     steps:
       - checkout:
-          path: ~/project/app/code/CodingDaniel
+          path: ~/project/app/code/CodingDaniel/LogoManager
 
       - run:
           name: Check PHP version.
           command: php -v
       - run:
-          name: List directories 1.
-          command: >-
-            cd ~/project && pwd && ls -al
-      - run:
-          name: List directories 2.
-          command: >-
-            cd ~/project/app && pwd && ls -al
-      - run:
-          name: List directories 3.
-          command: >-
-            cd ~/project/app/code && pwd && ls -al
-      - run:
           name: List directories 4.
           command: >-
             cd ~/project/app/code/CodingDaniel && pwd && ls -al
-      - run:
-          name: List directories 5.
-          command: >-
-            cd ~/project/vendor && pwd && ls -al
       - run:
           name: Composer require PHPCS and Magento coding standard.
           command: >-
@@ -48,9 +32,9 @@ jobs:
             squizlabs/php_codesniffer:3.x-dev
             magento/magento-coding-standard
       - run:
-          name: List directories.
+          name: List directories 5.
           command: >-
-            pwd && ls -al
+            cd ~/project/vendor && pwd && ls -al
       - run:
           name: Set installed config paths.
           command: >-
